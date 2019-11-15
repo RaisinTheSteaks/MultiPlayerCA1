@@ -1,7 +1,6 @@
 #include "Player.hpp"
 #include "Aircraft.hpp"
 #include "CommandQueue.hpp"
-
 struct AircraftMover
 {
 	AircraftMover(float vx, float vy) : velocity(vx, vy) {}
@@ -33,6 +32,12 @@ Player::Player()
 
 void Player::initializeActions()
 {
+	/*
+	[TODO]
+	https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
+	implement turning circles
+	*/
+
 	const float playerSpeed = 200.f;
 	mActionBindings[ActionID::MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.f));
 	mActionBindings[ActionID::MoveRight].action = derivedAction<Aircraft>(AircraftMover(playerSpeed, 0.f));

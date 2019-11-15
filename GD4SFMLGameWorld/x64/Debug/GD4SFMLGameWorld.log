@@ -1,0 +1,16 @@
+﻿  Aircraft.cpp
+  Application.cpp
+  Game.cpp
+  GameState.cpp
+  Main.cpp
+  MenuState.cpp
+  PauseState.cpp
+  Player.cpp
+  Ship.cpp
+  State.cpp
+  StateStack.cpp
+  TitleState.cpp
+  World.cpp
+  Generating Code...
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\ship.cpp(32): error C4716: 'toTurnSpeed': must return a value
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\ship.cpp(28): error C4716: 'toForwardSpeed': must return a value

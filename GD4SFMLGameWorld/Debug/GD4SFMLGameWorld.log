@@ -1,4 +1,41 @@
-﻿  Application.cpp
+﻿  Aircraft.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\entity.hpp(2): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Application.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\command.hpp(4): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Command.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\command.hpp(4): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  CommandQueue.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\command.hpp(4): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Component.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\component.hpp(2): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  Container.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\component.hpp(2): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  Entity.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\entity.hpp(2): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Game.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\scenenode.hpp(2): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  GameState.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\state.hpp(5): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Main.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\command.hpp(4): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  MenuState.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\state.hpp(5): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
   PauseState.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\state.hpp(5): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Player.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\command.hpp(4): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  SceneNode.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\scenenode.hpp(2): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  SpriteNode.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\scenenode.hpp(2): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  State.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\state.hpp(5): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  StateStack.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\state.hpp(5): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  TitleState.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\state.hpp(5): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Utility.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\utility.cpp(3): fatal error C1083: Cannot open include file: 'SFML/Graphics/Sprite.hpp': No such file or directory
+  World.cpp
+c:\users\josh\desktop\joshcharlieca1\multiplayerca1\gd4sfmlgameworld\scenenode.hpp(2): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
   Generating Code...
-  GD4SFMLGameWorld.vcxproj -> C:\Users\johnloane\source\repos\GD4SFMLGameWorld\Debug\GD4SFMLGameWorld.exe
