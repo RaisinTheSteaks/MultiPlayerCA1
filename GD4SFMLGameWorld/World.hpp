@@ -5,9 +5,10 @@
 #include "SceneNode.hpp"
 #include "SpriteNode.hpp"
 #include "Aircraft.hpp"
+#include "Ship.hpp"
 #include "LayerID.hpp"
 #include "CommandQueue.hpp"
-
+#include "SFML/System/Vector2.hpp"
 #include "SFML/System/NonCopyable.hpp"
 #include "SFML/Graphics/View.hpp"
 #include "SFML/Graphics/Texture.hpp"

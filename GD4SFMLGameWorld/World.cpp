@@ -43,6 +43,16 @@ void World::loadTextures()
 	mTextures.load(TextureID::Eagle, "Media/Textures/Eagle.png");
 	mTextures.load(TextureID::Raptor, "Media/Textures/Raptor.png");
 	mTextures.load(TextureID::Desert, "Media/Textures/Desert.png");
+	//Assets sourced from:
+	//https://opengameart.org/content/water
+	mTextures.load(TextureID::Desert, "Media/Textures/Ocean/Water.jpg");
+	//https://opengameart.org/content/sea-warfare-set-ships-and-more
+	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHull");
+	mTextures.load(TextureID::Cruiser, "Media/Textures/Cruiser/ShipCruiserHull");
+	mTextures.load(TextureID::Submarine, "Media/Textures/Subarine/ShipSubMarineHull");
+	mTextures.load(TextureID::BattleshipGun, "Media/Textures/Battleship/WeaponBattleshipStandardGun");
+	mTextures.load(TextureID::CruiserGun, "Media/Textures/Cruiser/WeaponCruiserStandardSTSM");
+	mTextures.load(TextureID::SubmarineGun, "Media/Textures/Subarine/WeaponSubmarineStandard");
 }
 
 void World::buildScene()
@@ -64,6 +74,12 @@ void World::buildScene()
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(backgroundSprite));
+
+	//Add player ship
+	std::unique_ptr<Ship> firstShip(new Ship(ShipID::Battleship, mTextures));
+	Vector2 offset = new Vector2(0, 0);
+	firstShip->setPosition(mSpawnPosition );
+
 
 	//Add players aircraft
 	std::unique_ptr<Aircraft> leader(new Aircraft(AircraftID::Eagle, mTextures));

@@ -1,6 +1,18 @@
 #include "Player.hpp"
 #include "Aircraft.hpp"
 #include "CommandQueue.hpp"
+
+/*
+[TODO]
+Replace this aircraft mover with a ship mover.
+	-Needs to include a 'RotateTo' feature
+	-Need to overhaul forward motion
+Add:	lives
+		Spawn location
+		Highlight colour
+		Player number
+	
+*/
 struct AircraftMover
 {
 	AircraftMover(float vx, float vy) : velocity(vx, vy) {}
