@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include "Aircraft.hpp"
 #include "CommandQueue.hpp"
+#include "Ship.hpp"
 
 /*
 [TODO]
@@ -24,6 +25,17 @@ struct AircraftMover
 	sf::Vector2f velocity;
 };
 
+struct ShipMover
+{
+	ShipMover(float vx, float vy) : velocity(vx, vy) {}
+
+	void operator()(Ship& ship, sf::Time) const
+	{
+		ship.accelerate(velocity);
+	}
+	sf::Vector2f velocity;
+};
+
 Player::Player()
 {
 	//Set initial key bindings
@@ -38,7 +50,7 @@ Player::Player()
 	//Assign all categories to the player's aircraft
 	for (auto& pair : mActionBindings)
 	{
-		pair.second.category = static_cast<int>(CategoryID::PlayerAircraft);
+		pair.second.category = static_cast<int>(CategoryID::PlayerShip);
 	}
 }
 
@@ -51,10 +63,10 @@ void Player::initializeActions()
 	*/
 
 	const float playerSpeed = 200.f;
-	mActionBindings[ActionID::MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.f));
-	mActionBindings[ActionID::MoveRight].action = derivedAction<Aircraft>(AircraftMover(playerSpeed, 0.f));
-	mActionBindings[ActionID::MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.f, -playerSpeed));
-	mActionBindings[ActionID::MoveDown].action = derivedAction<Aircraft>(AircraftMover(0.f, playerSpeed));
+	mActionBindings[ActionID::MoveLeft].action = derivedAction<Ship>(ShipMover(-playerSpeed, 0.f));
+	mActionBindings[ActionID::MoveRight].action = derivedAction<Ship>(ShipMover(playerSpeed, 0.f));
+	mActionBindings[ActionID::MoveUp].action = derivedAction<Ship>(ShipMover(0.f, -playerSpeed));
+	mActionBindings[ActionID::MoveDown].action = derivedAction<Ship>(ShipMover(0.f, playerSpeed));
 }
 
 void Player::handleEvent(const sf::Event& event, CommandQueue& commands)

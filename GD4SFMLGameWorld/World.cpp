@@ -14,7 +14,7 @@ void World::update(sf::Time dt)
 	//Scroll the world
 	mCamera.move(0.f, mScrollSpeed * dt.asSeconds());
 
-	mPlayerAircraft->setVelocity(0.f, 0.f);
+	mPlayer1Ship->setVelocity(0.f, 0.f);
 
 	//Forward commands to the scene graph, adapt velocity
 	while (!mCommandQueue.isEmpty())
@@ -45,14 +45,10 @@ void World::loadTextures()
 	mTextures.load(TextureID::Desert, "Media/Textures/Desert.png");
 	//Assets sourced from:
 	//https://opengameart.org/content/water
-	mTextures.load(TextureID::Desert, "Media/Textures/Ocean/Water.jpg");
+	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/Water.jpg");
 	//https://opengameart.org/content/sea-warfare-set-ships-and-more
-	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHull");
-	mTextures.load(TextureID::Cruiser, "Media/Textures/Cruiser/ShipCruiserHull");
-	mTextures.load(TextureID::Submarine, "Media/Textures/Subarine/ShipSubMarineHull");
-	mTextures.load(TextureID::BattleshipGun, "Media/Textures/Battleship/WeaponBattleshipStandardGun");
-	mTextures.load(TextureID::CruiserGun, "Media/Textures/Cruiser/WeaponCruiserStandardSTSM");
-	mTextures.load(TextureID::SubmarineGun, "Media/Textures/Subarine/WeaponSubmarineStandard");
+	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHull.png");
+
 }
 
 void World::buildScene()
@@ -66,7 +62,7 @@ void World::buildScene()
 	}
 
 	//Prepare the tiled background
-	sf::Texture& texture = mTextures.get(TextureID::Desert);
+	sf::Texture& texture = mTextures.get(TextureID::Ocean);
 	sf::IntRect textureRect(mWorldBounds);
 	texture.setRepeated(true);
 
@@ -75,27 +71,32 @@ void World::buildScene()
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(backgroundSprite));
 
-	//Add player ship
+	////Add player ship
 	std::unique_ptr<Ship> firstShip(new Ship(ShipID::Battleship, mTextures));
-	Vector2 offset = new Vector2(0, 0);
-	firstShip->setPosition(mSpawnPosition );
+	mPlayer1Ship = firstShip.get();
+	mPlayer1Ship->setPosition(mSpawnPosition);
+	mPlayer1Ship->setVelocity(40.f, mScrollSpeed);
+	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(firstShip));
+
+	//Vector2 offset = new Vector2(0, 0);
+	//firstShip->setPosition(mSpawnPosition );
 
 
-	//Add players aircraft
-	std::unique_ptr<Aircraft> leader(new Aircraft(AircraftID::Eagle, mTextures));
-	mPlayerAircraft = leader.get();
-	mPlayerAircraft->setPosition(mSpawnPosition);
-	mPlayerAircraft->setVelocity(40.f, mScrollSpeed);
-	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(leader));
+	////Add players aircraft
+	//std::unique_ptr<Aircraft> leader(new Aircraft(AircraftID::Eagle, mTextures));
+	//mPlayerAircraft = leader.get();
+	//mPlayerAircraft->setPosition(mSpawnPosition);
+	//mPlayerAircraft->setVelocity(40.f, mScrollSpeed);
+	//mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(leader));
 
-	//Add the two escorts
-	std::unique_ptr<Aircraft> leftEscort(new Aircraft(AircraftID::Raptor, mTextures));
-	leftEscort->setPosition(-80.f, 50.f);
-	mPlayerAircraft->attachChild(std::move(leftEscort));
+	////Add the two escorts
+	//std::unique_ptr<Aircraft> leftEscort(new Aircraft(AircraftID::Raptor, mTextures));
+	//leftEscort->setPosition(-80.f, 50.f);
+	//mPlayerAircraft->attachChild(std::move(leftEscort));
 
-	std::unique_ptr<Aircraft> rightEscort(new Aircraft(AircraftID::Raptor, mTextures));
-	rightEscort->setPosition(80.f, 50.f);
-	mPlayerAircraft->attachChild(std::move(rightEscort));
+	//std::unique_ptr<Aircraft> rightEscort(new Aircraft(AircraftID::Raptor, mTextures));
+	//rightEscort->setPosition(80.f, 50.f);
+	//mPlayerAircraft->attachChild(std::move(rightEscort));
 	
 }
 
@@ -105,24 +106,24 @@ void World::adaptPlayerPosition()
 	sf::FloatRect viewBounds(mCamera.getCenter() - mCamera.getSize() / 2.f, mCamera.getSize());
 	const float borderDistance = 40.f;
 
-	sf::Vector2f position = mPlayerAircraft->getPosition();
+	sf::Vector2f position = mPlayer1Ship->getPosition();
 	position.x = std::max(position.x, viewBounds.left + borderDistance);
 	position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
 	position.y = std::max(position.y, viewBounds.top + borderDistance);
 	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
-	mPlayerAircraft->setPosition(position);
+	mPlayer1Ship->setPosition(position);
 }
 
 void World::adaptPlayerVelocity()
 {
 	//Don't give the player an advantage of they move diagonally
-	sf::Vector2f velocity = mPlayerAircraft->getVelocity();
+	sf::Vector2f velocity = mPlayer1Ship->getVelocity();
 
 	//If moving diagonally, reduce the velocity by root 2
 	if (velocity.x != 0 && velocity.y != 0)
 	{
-		mPlayerAircraft->setVelocity(velocity / std::sqrt(2.f));
+		mPlayer1Ship->setVelocity(velocity / std::sqrt(2.f));
 	}
 	//add the scrolling velocity
-	mPlayerAircraft->accelerate(0.f, mScrollSpeed);
+	mPlayer1Ship->accelerate(0.f, mScrollSpeed);
 }

@@ -7,5 +7,6 @@ enum class CategoryID
 	Scene = 1 << 0,
 	PlayerAircraft = 1 << 1,
 	AlliedAircraft = 1 << 2,
-	EnemyAircraft = 1 << 3
+	EnemyAircraft = 1 << 3,
+	PlayerShip = 1 << 1
 };

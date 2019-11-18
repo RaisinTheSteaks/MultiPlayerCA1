@@ -49,4 +49,5 @@ private:
 	sf::Vector2f mSpawnPosition;
 	float mScrollSpeed;
 	Aircraft* mPlayerAircraft;
+	Ship* mPlayer1Ship;
 };
