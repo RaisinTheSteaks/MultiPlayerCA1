@@ -49,5 +49,6 @@ private:
 	sf::Vector2f mSpawnPosition;
 	float mScrollSpeed;
 	Aircraft* mPlayerAircraft;
+	//[TODO] Replace with a list/ array of pointers to players
 	Ship* mPlayer1Ship;
 };

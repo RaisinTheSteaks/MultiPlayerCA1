@@ -65,7 +65,9 @@ float getTurnSpeed(ShipID type)
 	}
 }
 
-Ship::Ship(ShipID type, const TextureHolder & textures) : mType(type), mSprite(textures.get(toTextureID(type)))
+Ship::Ship(ShipID type, const TextureHolder & textures) : 
+	mType(type), 
+	mSprite(textures.get(toTextureID(type)))
 {
 	sf::FloatRect bounds = mSprite.getLocalBounds();
 	mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
@@ -76,6 +78,10 @@ unsigned int Ship::getCategory() const
 	switch (mType)
 	{
 	case ShipID::Battleship:
+		return static_cast<int>(CategoryID::PlayerShip);
+	case ShipID::Cruiser:
+		return static_cast<int>(CategoryID::PlayerShip);
+	case ShipID::Submarine:
 		return static_cast<int>(CategoryID::PlayerShip);
 
 	default:

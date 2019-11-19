@@ -76,7 +76,14 @@ void World::buildScene()
 	mPlayer1Ship = firstShip.get();
 	mPlayer1Ship->setPosition(mSpawnPosition);
 	mPlayer1Ship->setVelocity(40.f, mScrollSpeed);
-	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(firstShip));
+	mSceneLayers[static_cast<int>(LayerID::WaterSurface)]->attachChild(std::move(firstShip));
+
+	////ForwardGun
+	////[TODO] Make gun class?
+	//std::unique_ptr<Gun> player1ForwardGun(new Gun(GunID::Raptor, mTextures));
+	//player1ForwardGun->setPosition(80.f, 50.f);
+	//mPlayer1Ship->attachChild(std::move(player1ForwardGun));
+
 
 	//Vector2 offset = new Vector2(0, 0);
 	//firstShip->setPosition(mSpawnPosition );
