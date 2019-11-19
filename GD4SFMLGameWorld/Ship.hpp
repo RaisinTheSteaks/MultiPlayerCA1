@@ -16,6 +16,7 @@ private:
 	//Get it.... because ships 'float'
 	float mForwardSpeed;
 	float mTurnSpeed;
+	sf::Vector2f mRotation;
 	ShipID mType;
 	sf::Sprite mSprite;
 };

@@ -79,7 +79,7 @@ void World::buildScene()
 	mSceneLayers[static_cast<int>(LayerID::WaterSurface)]->attachChild(std::move(firstShip));
 
 	////ForwardGun
-	////[TODO] Make gun class?
+	////[TODO] Make gun class
 	//std::unique_ptr<Gun> player1ForwardGun(new Gun(GunID::Raptor, mTextures));
 	//player1ForwardGun->setPosition(80.f, 50.f);
 	//mPlayer1Ship->attachChild(std::move(player1ForwardGun));
