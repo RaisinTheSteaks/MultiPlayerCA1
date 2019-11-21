@@ -33,9 +33,22 @@ struct ShipMover
 	{
 		ship.accelerate(velocity);
 	}
+
+	
 	sf::Vector2f velocity;
 };
+struct ShipRotator
+{
+	ShipRotator(float vx, float vy) : velocity(vx, vy) {}
 
+	void operator()(Ship& ship, sf::Time) const
+	{
+		ship.rotate(velocity.x);
+	}
+
+	
+	sf::Vector2f velocity;
+};
 Player::Player()
 {
 	//Set initial key bindings
@@ -43,6 +56,8 @@ Player::Player()
 	mKeyBinding[sf::Keyboard::D] = ActionID::MoveRight;
 	mKeyBinding[sf::Keyboard::W] = ActionID::MoveUp;
 	mKeyBinding[sf::Keyboard::S] = ActionID::MoveDown;
+	mKeyBinding[sf::Keyboard::Q] = ActionID::RotateLeft;
+	mKeyBinding[sf::Keyboard::E] = ActionID::RotateRight;
 
 	//Set initial action bindings
 	initializeActions();
@@ -62,7 +77,12 @@ void Player::initializeActions()
 	implement turning circles
 	*/
 
-	const float playerSpeed = 200.f;
+	const float playerSpeed = 125.f;
+
+
+	mActionBindings[ActionID::RotateLeft].action = derivedAction<Ship>(ShipRotator(0.f, -playerSpeed));
+	mActionBindings[ActionID::RotateLeft].action = derivedAction<Ship>(ShipRotator(0.f, playerSpeed));
+
 	mActionBindings[ActionID::MoveLeft].action = derivedAction<Ship>(ShipMover(-playerSpeed, 0.f));
 	mActionBindings[ActionID::MoveRight].action = derivedAction<Ship>(ShipMover(playerSpeed, 0.f));
 	mActionBindings[ActionID::MoveUp].action = derivedAction<Ship>(ShipMover(0.f, -playerSpeed));

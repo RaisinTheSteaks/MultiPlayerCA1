@@ -5,5 +5,7 @@ enum class ActionID
 	MoveRight,
 	MoveUp,
 	MoveDown,
+	RotateLeft,
+	RotateRight,
 	ActionCount
 };
