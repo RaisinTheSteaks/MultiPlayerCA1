@@ -8,7 +8,7 @@
 const sf::Time Application::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Application::Application()
-	: mWindow(sf::VideoMode(640, 480), "Stack States", sf::Style::Close)
+	: mWindow(sf::VideoMode(1280, 960), "Stack States", sf::Style::Close)
 	, mTextures()
 	, mFonts()
 	, mPlayer()

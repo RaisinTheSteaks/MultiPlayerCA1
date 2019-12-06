@@ -11,5 +11,6 @@ enum class TextureID
 	BattleshipGun,
 	CruiserGun,
 	TitleScreen,
-	Ocean
+	Ocean,
+	Island
 };

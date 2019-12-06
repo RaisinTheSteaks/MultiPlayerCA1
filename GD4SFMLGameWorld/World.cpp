@@ -12,7 +12,7 @@ World::World(sf::RenderWindow& window) : mWindow(window), mCamera(window.getDefa
 void World::update(sf::Time dt)
 {
 	//Scroll the world
-	mCamera.move(0.f, mScrollSpeed * dt.asSeconds());
+	//mCamera.move(0.f, mScrollSpeed * dt.asSeconds());
 
 	mPlayer1Ship->setVelocity(0.f, 0.f);
 
@@ -45,9 +45,10 @@ void World::loadTextures()
 	mTextures.load(TextureID::Desert, "Media/Textures/Desert.png");
 	//Assets sourced from:
 	//https://opengameart.org/content/water
-	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/Water.jpg");
+	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/Water1.png");
 	//https://opengameart.org/content/sea-warfare-set-ships-and-more
-	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHull.png");
+	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHullTest.png");
+	mTextures.load(TextureID::Island, "Media/Textures/Island/Island.png");
 
 }
 
@@ -66,6 +67,9 @@ void World::buildScene()
 	sf::IntRect textureRect(mWorldBounds);
 	texture.setRepeated(true);
 
+	sf::Texture& island = mTextures.get(TextureID::Island);
+	sf::IntRect islandRect(0, 0, 200, 500);
+
 	//Add the background sprite to the scene
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
@@ -77,6 +81,30 @@ void World::buildScene()
 	mPlayer1Ship->setPosition(mSpawnPosition);
 	mPlayer1Ship->setVelocity(40.f, mScrollSpeed);
 	mSceneLayers[static_cast<int>(LayerID::WaterSurface)]->attachChild(std::move(firstShip));
+
+
+
+	//adding island(s) 
+	// will add collision later for islands
+	std::unique_ptr<SpriteNode> islandSprite(new SpriteNode(island, textureRect));
+	islandSprite->setPosition(mCamera.getSize().x / 4.f, mWorldBounds.height - mCamera.getSize().y / 3.f);
+	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(islandSprite));
+
+
+	std::unique_ptr<SpriteNode> islandSprite1(new SpriteNode(island, textureRect));
+	islandSprite1->setPosition(mCamera.getSize().x / 5.f, mWorldBounds.height - mCamera.getSize().y / 1.5f);
+	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(islandSprite1));
+
+
+
+	std::unique_ptr<SpriteNode> islandSprite2(new SpriteNode(island, textureRect));
+	islandSprite2->setPosition(mCamera.getSize().x / 1.5f, mWorldBounds.height - mCamera.getSize().y / 1.7f);
+	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(islandSprite2));
+
+
+
+
+
 
 	////ForwardGun
 	////[TODO] Make gun class
@@ -132,5 +160,5 @@ void World::adaptPlayerVelocity()
 		mPlayer1Ship->setVelocity(velocity / std::sqrt(2.f));
 	}
 	//add the scrolling velocity
-	mPlayer1Ship->accelerate(0.f, mScrollSpeed);
+	//mPlayer1Ship->accelerate(0.f, mScrollSpeed);
 }
