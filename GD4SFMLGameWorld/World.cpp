@@ -88,18 +88,18 @@ void World::buildScene()
 	// will add collision later for islands
 	std::unique_ptr<SpriteNode> islandSprite(new SpriteNode(island, textureRect));
 	islandSprite->setPosition(mCamera.getSize().x / 4.f, mWorldBounds.height - mCamera.getSize().y / 3.f);
-	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(islandSprite));
+	mSceneLayers[static_cast<int>(LayerID::WaterSurface)]->attachChild(std::move(islandSprite));
 
 
 	std::unique_ptr<SpriteNode> islandSprite1(new SpriteNode(island, textureRect));
 	islandSprite1->setPosition(mCamera.getSize().x / 5.f, mWorldBounds.height - mCamera.getSize().y / 1.5f);
-	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(islandSprite1));
+	mSceneLayers[static_cast<int>(LayerID::WaterSurface)]->attachChild(std::move(islandSprite1));
 
 
 
 	std::unique_ptr<SpriteNode> islandSprite2(new SpriteNode(island, textureRect));
 	islandSprite2->setPosition(mCamera.getSize().x / 1.5f, mWorldBounds.height - mCamera.getSize().y / 1.7f);
-	mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(islandSprite2));
+	mSceneLayers[static_cast<int>(LayerID::WaterSurface)]->attachChild(std::move(islandSprite2));
 
 
 
@@ -122,7 +122,7 @@ void World::buildScene()
 	//mPlayerAircraft = leader.get();
 	//mPlayerAircraft->setPosition(mSpawnPosition);
 	//mPlayerAircraft->setVelocity(40.f, mScrollSpeed);
-	//mSceneLayers[static_cast<int>(LayerID::Air)]->attachChild(std::move(leader));
+	//mSceneLayers[static_cast<int>(LayerID::LowerAir)]->attachChild(std::move(leader));
 
 	////Add the two escorts
 	//std::unique_ptr<Aircraft> leftEscort(new Aircraft(AircraftID::Raptor, mTextures));

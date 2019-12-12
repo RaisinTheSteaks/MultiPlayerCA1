@@ -152,6 +152,8 @@ bool Player::isRealtimeAction(ActionID action)
 	case ActionID::MoveRight:
 	case ActionID::MoveUp:
 	case ActionID::MoveDown:
+	case ActionID::RotateLeft:
+	case ActionID::RotateRight:
 		return true;
 
 	default:
