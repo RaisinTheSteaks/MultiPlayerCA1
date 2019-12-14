@@ -1,6 +1,7 @@
 #pragma once
 #include "Command.hpp"
 #include "ActionID.hpp"
+#include "MissionStatusID.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <map>
@@ -18,11 +19,15 @@ public:
 	void assignKey(ActionID action, sf::Keyboard::Key key);
 	sf::Keyboard::Key getAssignedKey(ActionID action) const;
 
+	void setMissionStatus(MissionStatusID status);
+	MissionStatusID getMissionStatus() const;
+
 private:
 	void initializeActions();
 	static bool isRealtimeAction(ActionID action);
 
 private:
 	std::map<sf::Keyboard::Key, ActionID> mKeyBinding;
-	std::map<ActionID, Command> mActionBindings;
+	std::map<ActionID, Command> mActionBinding;
+	MissionStatusID mCurrentMissionStatus;
 };

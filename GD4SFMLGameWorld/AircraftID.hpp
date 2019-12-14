@@ -2,5 +2,7 @@
 enum class AircraftID
 {
 	Eagle,
-	Raptor
+	Raptor,
+	Avenger,
+	TypeCount
 };

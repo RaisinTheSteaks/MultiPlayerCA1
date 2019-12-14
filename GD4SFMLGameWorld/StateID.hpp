@@ -5,5 +5,7 @@ enum class StateID
 	Title,
 	Menu,
 	Game, 
-	Pause
+	Pause,
+	Settings,
+	GameOver
 };

@@ -4,6 +4,8 @@
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
+#include "MusicPlayer.hpp"
+#include "SoundPlayer.hpp"
 
 #include <memory>
 
@@ -22,12 +24,14 @@ public:
 
 	struct Context
 	{
-		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& font, Player& player);
+		Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& font, Player& player, MusicPlayer& music, SoundPlayer& sounds);
 
 		sf::RenderWindow* window;
 		TextureHolder* textures;
 		FontHolder* fonts;
 		Player* player;
+		MusicPlayer* music;
+		SoundPlayer* sounds;
 	};
 
 public:

@@ -2,9 +2,11 @@
 
 GameState::GameState(StateStack& stack, Context context)
 	:State(stack, context)
-	, mWorld(*context.window)
+	, mWorld(*context.window, *context.fonts, *context.sounds)
 	, mPlayer(*context.player)
 {
+	mPlayer.setMissionStatus(MissionStatusID::MissionRunning);
+	context.music->play(MusicID::MissionTheme);
 }
 
 void GameState::draw()
@@ -15,6 +17,17 @@ void GameState::draw()
 bool GameState::update(sf::Time dt)
 {
 	mWorld.update(dt);
+
+	if (!mWorld.hasAlivePlayer())
+	{
+		mPlayer.setMissionStatus(MissionStatusID::MissionFailure);
+		requestStackPush(StateID::GameOver);
+	}
+	else if (mWorld.hasPlayerReachedEnd())
+	{
+		mPlayer.setMissionStatus(MissionStatusID::MissionSuccess);
+		requestStackPush(StateID::GameOver);
+	}
 
 	CommandQueue& commands = mWorld.getCommandQueue();
 	mPlayer.handleRealtimeInput(commands);

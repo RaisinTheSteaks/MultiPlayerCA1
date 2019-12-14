@@ -3,6 +3,7 @@
 #include "ResourceIdentifiers.hpp"
 #include "Player.hpp"
 #include "StateStack.hpp"
+#include "MusicPlayer.hpp"
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -29,6 +30,9 @@ private:
 	TextureHolder mTextures;
 	FontHolder mFonts;
 	Player mPlayer;
+
+	MusicPlayer mMusic;
+	SoundPlayer mSoundPlayer;
 
 	StateStack mStateStack;
 

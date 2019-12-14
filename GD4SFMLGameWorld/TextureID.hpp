@@ -1,16 +1,19 @@
 #pragma once
 enum class TextureID
 {
-	Eagle,
-	Raptor,
-	Desert,
+	Entities,
+	Jungle,
+	TitleScreen,
+	Buttons,
+	Explosion,
+	Particle,
+	FinishLine,
 	Submarine,
 	Battleship,
 	Cruiser,
 	SubmarineGun,
 	BattleshipGun,
 	CruiserGun,
-	TitleScreen,
 	Ocean,
 	Island
 };

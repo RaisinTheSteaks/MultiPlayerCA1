@@ -12,7 +12,7 @@ namespace sf
 
 namespace GUI
 {
-	class Component : public sf::Drawable, sf::Transformable, private sf::NonCopyable
+	class Component : public sf::Drawable, public sf::Transformable, private sf::NonCopyable
 	{
 	public:
 		typedef std::shared_ptr<Component> Ptr;

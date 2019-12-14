@@ -22,13 +22,13 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{33225673-DED1-4CDE-9390-4F049ABAF66A}</ProjectGuid>
     <RootNamespace>GD4SFMLGameWorld</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -76,12 +76,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>M:\College\Year 4\MultiPlayer\SFML-2.5.1\include;E:\sfml\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\johnloane\Documents\SFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>M:\College\Year 4\MultiPlayer\SFML-2.5.1\lib;E:\sfml\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\johnloane\Documents\SFML-2.5.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -90,12 +90,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\sfml\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>M:\College\Year 4\MultiPlayer\SFML-2.5.1 64\SFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\sfml\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>M:\College\Year 4\MultiPlayer\SFML-2.5.1 64\SFML-2.5.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,7 +113,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\johnloane\Documents\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,62 +131,100 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\johnloane\Documents\SFML-2.5.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ActionID.hpp" />
-    <ClInclude Include="Aircraft.hpp" />
-    <ClInclude Include="AircraftID.hpp" />
+    <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Application.hpp" />
+    <ClInclude Include="BloomEffect.hpp" />
+    <ClInclude Include="Button.hpp" />
+    <ClInclude Include="ButtonID.hpp" />
     <ClInclude Include="CategoryID.hpp" />
     <ClInclude Include="Command.hpp" />
     <ClInclude Include="CommandQueue.hpp" />
     <ClInclude Include="Component.hpp" />
     <ClInclude Include="Container.hpp" />
+    <ClInclude Include="DataTables.hpp" />
+    <ClInclude Include="EmitterNode.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="FontID.hpp" />
-    <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GameOverState.hpp" />
     <ClInclude Include="GameState.hpp" />
+    <ClInclude Include="Label.hpp" />
     <ClInclude Include="LayerID.hpp" />
     <ClInclude Include="MenuState.hpp" />
+    <ClInclude Include="MissionStatusID.hpp" />
+    <ClInclude Include="MusicID.hpp" />
+    <ClInclude Include="MusicPlayer.hpp" />
     <ClInclude Include="OptionID.hpp" />
+    <ClInclude Include="Particle.hpp" />
+    <ClInclude Include="ParticleID.hpp" />
+    <ClInclude Include="ParticleNode.hpp" />
     <ClInclude Include="PauseState.hpp" />
+    <ClInclude Include="Pickup.hpp" />
+    <ClInclude Include="PickupID.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="PostEffect.hpp" />
+    <ClInclude Include="Projectile.hpp" />
+    <ClInclude Include="ProjectileID.hpp" />
     <ClInclude Include="ResourceHolder.hpp" />
     <ClInclude Include="ResourceIdentifiers.hpp" />
     <ClInclude Include="SceneNode.hpp" />
+    <ClInclude Include="SettingsState.hpp" />
+    <ClInclude Include="ShaderID.hpp" />
     <ClInclude Include="Ship.hpp" />
     <ClInclude Include="ShipID.hpp" />
+    <ClInclude Include="SoundEffectID.hpp" />
+    <ClInclude Include="SoundNode.hpp" />
+    <ClInclude Include="SoundPlayer.hpp" />
     <ClInclude Include="SpriteNode.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateID.hpp" />
     <ClInclude Include="StateStack.hpp" />
     <ClInclude Include="StateStackActionID.hpp" />
+    <ClInclude Include="TextNode.hpp" />
     <ClInclude Include="Utility.hpp" />
     <ClInclude Include="TextureID.hpp" />
     <ClInclude Include="TitleState.hpp" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Aircraft.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BloomEffect.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandQueue.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Container.cpp" />
+    <ClCompile Include="DataTables.cpp" />
+    <ClCompile Include="EmitterNode.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MusicPlayer.cpp" />
+    <ClCompile Include="ParticleNode.cpp" />
     <ClCompile Include="PauseState.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Pickup.cpp" />
+    <ClCompile Include="Player.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">M:\College\Year 4\MultiPlayer\SFML-2.5.1 64\SFML-2.5.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="PostEffect.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SceneNode.cpp" />
+    <ClCompile Include="SettingsState.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="SoundNode.cpp" />
+    <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SpriteNode.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="TextNode.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="World.cpp" />
