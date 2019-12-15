@@ -15,6 +15,8 @@ public:
 	virtual sf::FloatRect getBoundingRect() const;
 	virtual bool isMarkedForRemoval() const;
 
+	ShipID getType();
+
 	float getMaxSpeed() const;
 	void fire();
 	void launchMissile();

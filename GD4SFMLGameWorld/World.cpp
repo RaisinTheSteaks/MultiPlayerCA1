@@ -1,7 +1,7 @@
 #include "World.hpp"
 #include "ParticleID.hpp"
 #include "ParticleNode.hpp"
-
+#include "Gun.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 
 
@@ -19,6 +19,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 	, mSpawnPosition(mCamera.getSize().x / 2.f, mWorldBounds.height - mCamera.getSize().y / 2.f)
 	, mScrollSpeed(-50.f)
 	, mPlayerShip(nullptr)
+	, mPlayer1ForwardGun(nullptr)
 	, mEnemySpawnPoints()
 	, mActiveEnemies()
 {
@@ -113,6 +114,7 @@ void World::loadTextures()
 	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/Water1.png");
 	//https://opengameart.org/content/sea-warfare-set-ships-and-more
 	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHullTest.png");
+	mTextures.load(TextureID::BattleshipGun, "Media/Textures/Battleship/WeaponBattleshipStandardGun.png");
 	mTextures.load(TextureID::Island, "Media/Textures/Island/Island.png");
 }
 
@@ -226,9 +228,13 @@ void World::buildScene()
 	std::unique_ptr<Ship> player(new Ship(ShipID::Battleship, mTextures, mFonts));
 	mPlayerShip = player.get();
 	mPlayerShip->setPosition(mSpawnPosition);
-	mSceneLayers[static_cast<int>(LayerID::UpperAir)]->attachChild(std::move(player));
+	mSceneLayers[static_cast<int>(LayerID::LowerAir)]->attachChild(std::move(player));
 
-
+	std::unique_ptr<Gun> player1ForwardGun(new Gun(mPlayerShip->getType(),mTextures));
+	mPlayer1ForwardGun = player1ForwardGun.get();
+	sf::Vector2f offset(50.f, 0.f);
+	mPlayer1ForwardGun->setPosition(offset);
+	mSceneLayers[static_cast<int>(LayerID::UpperAir)]->attachChild(std::move(player1ForwardGun));
 
 	//adding island(s) 
 	// will add collision later for islands

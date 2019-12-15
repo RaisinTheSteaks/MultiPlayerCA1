@@ -137,6 +137,10 @@ void Ship::updateCurrent(sf::Time dt, CommandQueue& commands)
 	updateRollAnimation();
 }
 
+ShipID Ship::getType()
+{
+	return mType;
+}
 
 unsigned int Ship::getCategory() const
 {

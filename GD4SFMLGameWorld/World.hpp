@@ -13,7 +13,7 @@
 #include "BloomEffect.hpp"
 #include "SoundNode.hpp"
 #include "SoundPlayer.hpp"
-
+#include "Gun.hpp"
 #include "SFML/System/NonCopyable.hpp"
 #include "SFML/Graphics/View.hpp"
 #include "SFML/Graphics/Texture.hpp"
@@ -87,6 +87,7 @@ private:
 	sf::Vector2f mSpawnPosition;
 	float mScrollSpeed;
 	Ship* mPlayerShip;
+	Gun* mPlayer1ForwardGun;
 
 	std::vector<SpawnPoint>	mEnemySpawnPoints;
 	std::vector<Ship*> mActiveEnemies;
