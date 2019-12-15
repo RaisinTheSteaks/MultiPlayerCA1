@@ -55,6 +55,7 @@ Ship::Ship(ShipID type, const TextureHolder& textures, const FontHolder& fonts)
 	, mDirectionIndex(0)
 	, mHealthDisplay(nullptr)
 	, mMissileDisplay(nullptr)
+	, mDirectionVec(0.f,0.f)	//Added to store direction
 {
 	mExplosion.setFrameSize(sf::Vector2i(256, 256));
 	mExplosion.setNumFrames(16);
@@ -194,6 +195,16 @@ void Ship::playerLocalSound(CommandQueue& commands, SoundEffectID effect)
 		node.playSound(effect, worldPosition);
 	});
 	commands.push(command);
+}
+
+sf::Vector2f Ship::getDirectionVec()
+{
+	return mDirectionVec;
+}
+
+void Ship::setDirectionVec(sf::Vector2f dir)
+{
+	mDirectionVec = dir;
 }
 
 void Ship::fire()

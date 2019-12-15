@@ -25,6 +25,8 @@ public:
 
 	void playerLocalSound(CommandQueue& command, SoundEffectID effect);
 
+	sf::Vector2f getDirectionVec();
+	void setDirectionVec(sf::Vector2f dir);
 private:
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
@@ -65,4 +67,6 @@ private:
 	int mMissileAmmo;
 	float mTravelledDistance;
 	std::size_t mDirectionIndex;
+
+	sf::Vector2f mDirectionVec;
 };
