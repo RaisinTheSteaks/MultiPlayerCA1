@@ -87,7 +87,7 @@ private:
 	sf::Vector2f mSpawnPosition;
 	float mScrollSpeed;
 	Ship* mPlayerShip;
-
+	Ship* mPlayerShip2;
 	std::vector<SpawnPoint>	mEnemySpawnPoints;
 	std::vector<Ship*> mActiveEnemies;
 

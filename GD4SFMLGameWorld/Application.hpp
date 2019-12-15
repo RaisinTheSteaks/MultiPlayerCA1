@@ -30,7 +30,7 @@ private:
 	TextureHolder mTextures;
 	FontHolder mFonts;
 	Player mPlayer;
-
+	Player mPlayer2;
 	MusicPlayer mMusic;
 	SoundPlayer mSoundPlayer;
 

@@ -2,12 +2,18 @@
 #include "CommandQueue.hpp"
 #include "Ship.hpp"
 #include "ActionID.hpp"
+#include "DataTables.hpp"
 
 #include <map>
 #include <string>
 #include <algorithm>
 #include <iostream>
 
+
+namespace
+{
+	const std::vector<PlayerData> Table = initializePlayerData();
+}
 
 struct ShipMover
 {
@@ -24,22 +30,24 @@ struct ShipMover
 	sf::Vector2f velocity;
 };
 
-Player::Player() : mCurrentMissionStatus(MissionStatusID::MissionRunning)
+Player::Player(PlayerID type) : mCurrentMissionStatus(MissionStatusID::MissionRunning), mType(type)
 {
-	// Set initial key bindings
-	mKeyBinding[sf::Keyboard::A] = ActionID::MoveLeft;
-	mKeyBinding[sf::Keyboard::D] = ActionID::MoveRight;
-	mKeyBinding[sf::Keyboard::W] = ActionID::MoveUp;
-	mKeyBinding[sf::Keyboard::S] = ActionID::MoveDown;
-	mKeyBinding[sf::Keyboard::Space] = ActionID::Fire;
-	mKeyBinding[sf::Keyboard::M] = ActionID::LaunchMissile;
+
+	mKeyBinding = Table[static_cast<int>(mType)].mKeyBinding;
+	//// Set initial key bindings
+	//mKeyBinding[sf::Keyboard::A] = ActionID::MoveLeft;
+	//mKeyBinding[sf::Keyboard::D] = ActionID::MoveRight;
+	//mKeyBinding[sf::Keyboard::W] = ActionID::MoveUp;
+	//mKeyBinding[sf::Keyboard::S] = ActionID::MoveDown;
+	//mKeyBinding[sf::Keyboard::Space] = ActionID::Fire;
+	//mKeyBinding[sf::Keyboard::M] = ActionID::LaunchMissile;
 
 	// Set initial action bindings
 	initializeActions();
 
 	// Assign all categories to player's Ship
 	for (auto& pair : mActionBinding)
-		pair.second.category = static_cast<int>(CategoryID::PlayerShip);
+		pair.second.category = static_cast<int>(Table[static_cast<int>(mType)].categoryID);
 }
 
 void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
