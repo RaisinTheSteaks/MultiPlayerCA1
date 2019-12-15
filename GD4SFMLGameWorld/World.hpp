@@ -36,6 +36,8 @@ public:
 	void draw();
 	CommandQueue& getCommandQueue();
 	bool hasAlivePlayer() const;
+	bool hasAlivePlayer1() const;
+	bool hasAlivePlayer2() const;
 	bool hasPlayerReachedEnd() const;
 	void updateSounds();
 

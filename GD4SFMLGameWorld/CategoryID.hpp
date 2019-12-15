@@ -11,10 +11,11 @@ enum class CategoryID
 	EnemyShip = 1 << 4,
 	Pickup = 1 << 5,
 	AlliedProjectile = 1 << 6,
-	EnemyProjectile = 1 << 7,
-	ParticleSystem = 1 << 8,
-	SoundEffect = 1 << 9,
+	Allied2Projectile = 1 << 7,
+	EnemyProjectile = 1 << 8,
+	ParticleSystem = 1 << 9,
+	SoundEffect = 1 << 10,
 
 	Ship = PlayerShip | Player2Ship | AlliedShip | EnemyShip,
-	Projectile = AlliedProjectile | EnemyProjectile,
+	Projectile = AlliedProjectile | Allied2Projectile | EnemyProjectile,
 };

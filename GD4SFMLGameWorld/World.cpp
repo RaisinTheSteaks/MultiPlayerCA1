@@ -87,6 +87,17 @@ bool World::hasAlivePlayer() const
 	return !mPlayerShip->isMarkedForRemoval() && !mPlayerShip2->isMarkedForRemoval();
 }
 
+bool World::hasAlivePlayer1() const
+{
+	return !mPlayerShip->isMarkedForRemoval();
+}
+
+bool World::hasAlivePlayer2() const
+{
+	return !mPlayerShip2->isMarkedForRemoval();
+}
+
+
 bool World::hasPlayerReachedEnd() const
 {
 	return !mWorldBounds.contains(mPlayerShip->getPosition());
@@ -176,6 +187,19 @@ void World::handleCollisions()
 			ship.damage(projectile.getDamage());
 			projectile.destroy();
 		}
+
+		//both player ships can now damage each other, Projectile draw distance from ship was increased
+		else if (matchesCategories(pair, CategoryID::PlayerShip, CategoryID::AlliedProjectile) || matchesCategories(pair, CategoryID::Player2Ship, CategoryID::AlliedProjectile))
+		{
+			auto& ship = static_cast<Ship&>(*pair.first);
+			auto& projectile = static_cast<Projectile&>(*pair.second);
+
+			// Apply projectile damage to Ship, destroy projectile
+			ship.damage(projectile.getDamage());
+			projectile.destroy();
+		}
+	
+
 	}
 }
 

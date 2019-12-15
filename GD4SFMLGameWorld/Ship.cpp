@@ -297,7 +297,7 @@ void Ship::createBullets(SceneNode& node, const TextureHolder& textures) const
 	switch (mSpreadLevel)
 	{
 	case 1:
-		createProjectile(node, type, 0.0f, 0.5f, textures);
+		createProjectile(node, type, 0.0f, 0.6f, textures);
 		break;
 
 	case 2:
