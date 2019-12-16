@@ -93,6 +93,14 @@ Ship::Ship(ShipID type, const TextureHolder& textures, const FontHolder& fonts)
 		attachChild(std::move(missileDisplay));
 	}
 
+	if (getCategory() == (static_cast<int>(CategoryID::Player2Ship)))
+	{
+		std::unique_ptr<TextNode> missileDisplay(new TextNode(fonts, ""));
+		missileDisplay->setPosition(0, 70);
+		mMissileDisplay = missileDisplay.get();
+		attachChild(std::move(missileDisplay));
+	}
+
 	updateTexts();
 }
 
@@ -140,7 +148,15 @@ void Ship::updateCurrent(sf::Time dt, CommandQueue& commands)
 unsigned int Ship::getCategory() const
 {
 	if (isAllied())
-		return static_cast<int>(CategoryID::PlayerShip);
+		if (mType == ShipID::Battleship)
+		{
+			return static_cast<int>(CategoryID::PlayerShip);
+		}
+
+		else
+		{
+			return static_cast<int>(CategoryID::Player2Ship);
+		}
 	else
 		return static_cast<int>(CategoryID::EnemyShip);
 }
@@ -157,7 +173,7 @@ bool Ship::isMarkedForRemoval() const
 
 bool Ship::isAllied() const
 {
-	return mType == ShipID::Battleship;
+	return mType == ShipID::Battleship || mType == ShipID::Battleship2;
 }
 
 float Ship::getMaxSpeed() const
@@ -281,7 +297,7 @@ void Ship::createBullets(SceneNode& node, const TextureHolder& textures) const
 	switch (mSpreadLevel)
 	{
 	case 1:
-		createProjectile(node, type, 0.0f, 0.5f, textures);
+		createProjectile(node, type, 0.0f, 0.6f, textures);
 		break;
 
 	case 2:

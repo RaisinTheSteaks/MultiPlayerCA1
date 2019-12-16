@@ -2,15 +2,26 @@
 
 #include "ResourceIdentifiers.hpp"
 #include "TextureID.hpp"
+#include "ActionID.hpp"
+#include "CategoryID.hpp"
+
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Rect.hpp>
+#include <SFML/Window/Event.hpp>
 
 #include <vector>
 #include <functional>
+#include <map>
 
 class Ship;
+
+struct PlayerData
+{
+	std::map<sf::Keyboard::Key, ActionID> mKeyBinding;
+	CategoryID categoryID;
+};
 
 struct Direction
 {
@@ -54,6 +65,7 @@ struct ParticleData
 	sf::Time lifetime;
 };
 
+std::vector<PlayerData> initializePlayerData();
 std::vector<ShipData> initializeShipData();
 std::vector<ProjectileData> initializeProjectileData();
 std::vector<PickupData> initializePickupData();

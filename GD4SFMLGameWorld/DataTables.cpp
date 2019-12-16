@@ -6,7 +6,32 @@
 #include "ProjectileID.hpp"
 #include "PickupID.hpp"
 #include "ParticleID.hpp"
+#include "PlayerID.hpp"
+#include "CategoryID.hpp"
 
+
+std::vector<PlayerData> initializePlayerData()
+{
+	std::vector<PlayerData> data(static_cast<int>(PlayerID::TypeCount));
+	data[static_cast<int>(PlayerID::Player1)].mKeyBinding[sf::Keyboard::A] = ActionID::MoveLeft;
+	data[static_cast<int>(PlayerID::Player1)].mKeyBinding[sf::Keyboard::D] = ActionID::MoveRight;
+	data[static_cast<int>(PlayerID::Player1)].mKeyBinding[sf::Keyboard::W] = ActionID::MoveUp;
+	data[static_cast<int>(PlayerID::Player1)].mKeyBinding[sf::Keyboard::S] = ActionID::MoveDown;
+	data[static_cast<int>(PlayerID::Player1)].mKeyBinding[sf::Keyboard::Space] = ActionID::Fire;
+	data[static_cast<int>(PlayerID::Player1)].mKeyBinding[sf::Keyboard::N] = ActionID::LaunchMissile;
+	data[static_cast<int>(PlayerID::Player1)].categoryID = CategoryID::PlayerShip;
+
+	data[static_cast<int>(PlayerID::Player2)].mKeyBinding[sf::Keyboard::Left] = ActionID::MoveLeft;
+	data[static_cast<int>(PlayerID::Player2)].mKeyBinding[sf::Keyboard::Right] = ActionID::MoveRight;
+	data[static_cast<int>(PlayerID::Player2)].mKeyBinding[sf::Keyboard::Up] = ActionID::MoveUp;
+	data[static_cast<int>(PlayerID::Player2)].mKeyBinding[sf::Keyboard::Down] = ActionID::MoveDown;
+	data[static_cast<int>(PlayerID::Player2)].mKeyBinding[sf::Keyboard::Enter] = ActionID::Fire;
+	data[static_cast<int>(PlayerID::Player2)].mKeyBinding[sf::Keyboard::M] = ActionID::LaunchMissile;
+	data[static_cast<int>(PlayerID::Player2)].categoryID = CategoryID::Player2Ship;
+
+
+	return data;
+}
 std::vector<ShipData> initializeShipData()
 {
 	std::vector<ShipData> data(static_cast<int>(ShipID::TypeCount));
@@ -16,6 +41,13 @@ std::vector<ShipData> initializeShipData()
 	data[static_cast<int>(ShipID::Battleship)].textureRect = sf::IntRect(0, 0, 25, 169);
 	data[static_cast<int>(ShipID::Battleship)].texture = TextureID::Battleship;
 	data[static_cast<int>(ShipID::Battleship)].hasRollAnimation = false;
+
+	data[static_cast<int>(ShipID::Battleship2)].hitpoints = 100;
+	data[static_cast<int>(ShipID::Battleship2)].speed = 200.f;
+	data[static_cast<int>(ShipID::Battleship2)].fireInterval = sf::seconds(1);
+	data[static_cast<int>(ShipID::Battleship2)].textureRect = sf::IntRect(0, 0, 25, 169);
+	data[static_cast<int>(ShipID::Battleship2)].texture = TextureID::Battleship;
+	data[static_cast<int>(ShipID::Battleship2)].hasRollAnimation = false;
 
 	data[static_cast<int>(ShipID::Raptor)].hitpoints = 20;
 	data[static_cast<int>(ShipID::Raptor)].speed = 80.f;

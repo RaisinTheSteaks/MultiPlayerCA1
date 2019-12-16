@@ -36,6 +36,8 @@ public:
 	void draw();
 	CommandQueue& getCommandQueue();
 	bool hasAlivePlayer() const;
+	bool hasAlivePlayer1() const;
+	bool hasAlivePlayer2() const;
 	bool hasPlayerReachedEnd() const;
 	void updateSounds();
 
@@ -87,7 +89,7 @@ private:
 	sf::Vector2f mSpawnPosition;
 	float mScrollSpeed;
 	Ship* mPlayerShip;
-
+	Ship* mPlayerShip2;
 	std::vector<SpawnPoint>	mEnemySpawnPoints;
 	std::vector<Ship*> mActiveEnemies;
 

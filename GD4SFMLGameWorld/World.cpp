@@ -19,6 +19,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 	, mSpawnPosition(mCamera.getSize().x / 2.f, mWorldBounds.height - mCamera.getSize().y / 2.f)
 	, mScrollSpeed(-50.f)
 	, mPlayerShip(nullptr)
+	, mPlayerShip2(nullptr)
 	, mEnemySpawnPoints()
 	, mActiveEnemies()
 {
@@ -35,7 +36,7 @@ void World::update(sf::Time dt)
 	// Scroll the world, reset player velocity
 	//mCamera.move(0.f, mScrollSpeed * dt.asSeconds());
 	mPlayerShip->setVelocity(0.f, 0.f);
-
+	mPlayerShip2->setVelocity(0.f, 0.f);
 	// Setup commands to destroy entities, and guide missiles
 	destroyEntitiesOutsideView();
 	guideMissiles();
@@ -83,8 +84,19 @@ CommandQueue& World::getCommandQueue()
 
 bool World::hasAlivePlayer() const
 {
+	return !mPlayerShip->isMarkedForRemoval() && !mPlayerShip2->isMarkedForRemoval();
+}
+
+bool World::hasAlivePlayer1() const
+{
 	return !mPlayerShip->isMarkedForRemoval();
 }
+
+bool World::hasAlivePlayer2() const
+{
+	return !mPlayerShip2->isMarkedForRemoval();
+}
+
 
 bool World::hasPlayerReachedEnd() const
 {
@@ -175,6 +187,19 @@ void World::handleCollisions()
 			ship.damage(projectile.getDamage());
 			projectile.destroy();
 		}
+
+		//both player ships can now damage each other, Projectile draw distance from ship was increased
+		else if (matchesCategories(pair, CategoryID::PlayerShip, CategoryID::AlliedProjectile) || matchesCategories(pair, CategoryID::Player2Ship, CategoryID::AlliedProjectile))
+		{
+			auto& ship = static_cast<Ship&>(*pair.first);
+			auto& projectile = static_cast<Projectile&>(*pair.second);
+
+			// Apply projectile damage to Ship, destroy projectile
+			ship.damage(projectile.getDamage());
+			projectile.destroy();
+		}
+	
+
 	}
 }
 
@@ -228,7 +253,11 @@ void World::buildScene()
 	mPlayerShip->setPosition(mSpawnPosition);
 	mSceneLayers[static_cast<int>(LayerID::UpperAir)]->attachChild(std::move(player));
 
-
+	// Add player2's Ship
+	std::unique_ptr<Ship> player2(new Ship(ShipID::Battleship2, mTextures, mFonts));
+	mPlayerShip2 = player2.get();
+	mPlayerShip2->setPosition(mSpawnPosition + sf::Vector2f(100, 0));
+	mSceneLayers[static_cast<int>(LayerID::UpperAir)]->attachChild(std::move(player2));
 
 	//adding island(s) 
 	// will add collision later for islands
@@ -264,6 +293,13 @@ void World::adaptPlayerPosition()
 	position.y = std::max(position.y, viewBounds.top + borderDistance);
 	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
 	mPlayerShip->setPosition(position);
+
+	sf::Vector2f position2 = mPlayerShip2->getPosition();
+	position2.x = std::max(position2.x, viewBounds.left + borderDistance);
+	position2.x = std::min(position2.x, viewBounds.left + viewBounds.width - borderDistance);
+	position2.y = std::max(position2.y, viewBounds.top + borderDistance);
+	position2.y = std::min(position2.y, viewBounds.top + viewBounds.height - borderDistance);
+	mPlayerShip2->setPosition(position2);
 }
 
 void World::adaptPlayerVelocity()
@@ -273,6 +309,13 @@ void World::adaptPlayerVelocity()
 	// If moving diagonally, reduce velocity (to have always same velocity)
 	if (velocity.x != 0.f && velocity.y != 0.f)
 		mPlayerShip->setVelocity(velocity / std::sqrt(2.f));
+
+
+	sf::Vector2f velocity2 = mPlayerShip2->getVelocity();
+
+	// If moving diagonally, reduce velocity (to have always same velocity)
+	if (velocity2.x != 0.f && velocity2.y != 0.f)
+		mPlayerShip2->setVelocity(velocity2 / std::sqrt(2.f));
 
 	// Add scrolling velocity
 	//mPlayerShip->accelerate(0.f, mScrollSpeed);

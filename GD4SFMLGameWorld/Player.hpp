@@ -2,6 +2,7 @@
 #include "Command.hpp"
 #include "ActionID.hpp"
 #include "MissionStatusID.hpp"
+#include "PlayerID.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <map>
@@ -11,7 +12,7 @@ class CommandQueue;
 class Player
 {
 public:
-	Player();
+	Player(PlayerID type);
 
 	void handleEvent(const sf::Event& event, CommandQueue& commands);
 	void handleRealtimeInput(CommandQueue& commands);
@@ -30,4 +31,5 @@ private:
 	std::map<sf::Keyboard::Key, ActionID> mKeyBinding;
 	std::map<ActionID, Command> mActionBinding;
 	MissionStatusID mCurrentMissionStatus;
+	PlayerID mType;
 };
