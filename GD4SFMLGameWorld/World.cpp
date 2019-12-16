@@ -1,7 +1,7 @@
 #include "World.hpp"
 #include "ParticleID.hpp"
 #include "ParticleNode.hpp"
-
+#include "Gun.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 
 
@@ -19,6 +19,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 	, mSpawnPosition(mCamera.getSize().x / 2.f, mWorldBounds.height - mCamera.getSize().y / 2.f)
 	, mScrollSpeed(-50.f)
 	, mPlayerShip(nullptr)
+	, mPlayerGuns()
 	, mPlayerShip2(nullptr)
 	, mEnemySpawnPoints()
 	, mActiveEnemies()
@@ -125,6 +126,7 @@ void World::loadTextures()
 	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/Water1.png");
 	//https://opengameart.org/content/sea-warfare-set-ships-and-more
 	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHullTest.png");
+	mTextures.load(TextureID::BattleshipGun, "Media/Textures/Battleship/WeaponBattleshipStandardGun.png");
 	mTextures.load(TextureID::Island, "Media/Textures/Island/Island.png");
 }
 
@@ -247,18 +249,33 @@ void World::buildScene()
 	std::unique_ptr<SoundNode> soundNode(new SoundNode(mSounds));
 	mSceneGraph.attachChild(std::move(soundNode));
 
+#pragma region Josh Code
+
 	// Add player's Ship
+	/*
+	Player Ship is added to the lower air layer. All boats and projectiles will be added here.
+	Forward Gun is a child of the player ship so it moves with the ship.
+	Forward Gun gets drawn on top of the ship.
+
+	*/
 	std::unique_ptr<Ship> player(new Ship(ShipID::Battleship, mTextures, mFonts));
 	mPlayerShip = player.get();
 	mPlayerShip->setPosition(mSpawnPosition);
-	mSceneLayers[static_cast<int>(LayerID::UpperAir)]->attachChild(std::move(player));
+	mSceneLayers[static_cast<int>(LayerID::LowerAir)]->attachChild(std::move(player));
 
+	std::unique_ptr<Gun> player1ForwardGun(new Gun(mPlayerShip->getType(), mTextures));
+	mPlayerGuns[0] = player1ForwardGun.get();
+	sf::Vector2f offset(0.f, -35.f);
+	mPlayerGuns[0]->setPosition(offset);
+	mPlayerShip->attachChild(std::move(player1ForwardGun));
+
+	mPlayerShip->addGun(mPlayerGuns[0]);
+#pragma endregion
 	// Add player2's Ship
 	std::unique_ptr<Ship> player2(new Ship(ShipID::Battleship2, mTextures, mFonts));
 	mPlayerShip2 = player2.get();
 	mPlayerShip2->setPosition(mSpawnPosition + sf::Vector2f(100, 0));
 	mSceneLayers[static_cast<int>(LayerID::UpperAir)]->attachChild(std::move(player2));
-
 	//adding island(s) 
 	// will add collision later for islands
 	std::unique_ptr<SpriteNode> islandSprite(new SpriteNode(island, textureRect));

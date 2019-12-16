@@ -17,17 +17,21 @@ namespace
 
 struct ShipMover
 {
-	ShipMover(float vx, float vy)
-		: velocity(vx, vy)
+	ShipMover(float rotation , float acceleration):
+		rotation(rotation),
+		acceleration(acceleration)
 	{
 	}
 
 	void operator() (Ship& Ship, sf::Time) const
 	{
-		Ship.accelerate(velocity * Ship.getMaxSpeed());
-	}
+		sf::Vector2f velocity = Ship.getDirectionVec();
+		velocity *= Ship.getMaxSpeed()*acceleration;
 
-	sf::Vector2f velocity;
+		Ship.accelerate(velocity);
+		Ship.setRotation(Ship.getRotation()*rotation);
+	}
+	float rotation, acceleration;
 };
 
 Player::Player(PlayerID type) : mCurrentMissionStatus(MissionStatusID::MissionRunning), mType(type)
@@ -115,10 +119,12 @@ MissionStatusID Player::getMissionStatus() const
 
 void Player::initializeActions()
 {
+	//Changed to provide direction of steering and acceleration vs deceleration
 	mActionBinding[ActionID::MoveLeft].action = derivedAction<Ship>(ShipMover(-1, 0));
 	mActionBinding[ActionID::MoveRight].action = derivedAction<Ship>(ShipMover(+1, 0));
-	mActionBinding[ActionID::MoveUp].action = derivedAction<Ship>(ShipMover(0, -1));
-	mActionBinding[ActionID::MoveDown].action = derivedAction<Ship>(ShipMover(0, +1));
+	mActionBinding[ActionID::MoveUp].action = derivedAction<Ship>(ShipMover(0, 1));
+	mActionBinding[ActionID::MoveDown].action = derivedAction<Ship>(ShipMover(0, -1));
+
 	mActionBinding[ActionID::Fire].action = derivedAction<Ship>([](Ship& a, sf::Time) { a.fire(); });
 	mActionBinding[ActionID::LaunchMissile].action = derivedAction<Ship>([](Ship& a, sf::Time) { a.launchMissile(); });
 }

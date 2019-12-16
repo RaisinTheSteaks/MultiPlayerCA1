@@ -20,6 +20,8 @@ namespace
 	const std::vector<ShipData> Table = initializeShipData();
 }
 
+//To be used in later iterations to change the texture of the ship based on type chosen by player
+
 //TextureID toTextureID(ShipID type)
 //{
 //	switch (type)
@@ -55,6 +57,8 @@ Ship::Ship(ShipID type, const TextureHolder& textures, const FontHolder& fonts)
 	, mDirectionIndex(0)
 	, mHealthDisplay(nullptr)
 	, mMissileDisplay(nullptr)
+	, mGuns()
+	, mDirectionVec(0.f,0.f)	//Added to store direction
 {
 	mExplosion.setFrameSize(sf::Vector2i(256, 256));
 	mExplosion.setNumFrames(16);
@@ -144,6 +148,17 @@ void Ship::updateCurrent(sf::Time dt, CommandQueue& commands)
 	updateRollAnimation();
 }
 
+ShipID Ship::getType()
+{
+	return mType;
+}
+
+//Used to give the Ship access to the guns methods.
+//To replace magic numbers with better system soon
+void Ship::addGun(Gun* gun)
+{
+	mGuns[0] = gun;
+}
 
 unsigned int Ship::getCategory() const
 {
@@ -210,6 +225,16 @@ void Ship::playerLocalSound(CommandQueue& commands, SoundEffectID effect)
 		node.playSound(effect, worldPosition);
 	});
 	commands.push(command);
+}
+
+sf::Vector2f Ship::getDirectionVec()
+{
+	return mDirectionVec;
+}
+
+void Ship::setDirectionVec(sf::Vector2f dir)
+{
+	mDirectionVec = dir;
 }
 
 void Ship::fire()

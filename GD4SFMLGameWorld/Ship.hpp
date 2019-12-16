@@ -6,6 +6,9 @@
 #include "TextNode.hpp"
 #include "Projectile.hpp"
 #include "Animation.hpp"
+#include <array>
+//Including gun instead of forward declaring to make sure that I can access the gun's fire method
+#include "Gun.hpp"
 
 class Ship : public Entity
 {
@@ -14,6 +17,9 @@ public:
 	virtual unsigned int getCategory() const;
 	virtual sf::FloatRect getBoundingRect() const;
 	virtual bool isMarkedForRemoval() const;
+
+	ShipID getType();
+	void addGun(Gun* gun);
 
 	float getMaxSpeed() const;
 	void fire();
@@ -25,6 +31,8 @@ public:
 
 	void playerLocalSound(CommandQueue& command, SoundEffectID effect);
 
+	sf::Vector2f getDirectionVec();
+	void setDirectionVec(sf::Vector2f dir);
 private:
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
@@ -65,4 +73,13 @@ private:
 	int mMissileAmmo;
 	float mTravelledDistance;
 	std::size_t mDirectionIndex;
+	/*
+		Joshua Corcoran
+		D00190830
+		____________
+		mDirectionVec is from me trying to get the boat to 'steer' instead of slide around
+		
+	*/
+	sf::Vector2f mDirectionVec;
+	std::array<Gun*,2>mGuns;
 };
