@@ -7,6 +7,9 @@
 #include "Projectile.hpp"
 #include "Animation.hpp"
 
+//Including gun instead of forward declaring to make sure that I can access the gun's fire method
+#include "Gun.hpp"
+
 class Ship : public Entity
 {
 public:
@@ -69,6 +72,13 @@ private:
 	int mMissileAmmo;
 	float mTravelledDistance;
 	std::size_t mDirectionIndex;
-
+	/*
+		Joshua Corcoran
+		D00190830
+		____________
+		mDirectionVec is from me trying to get the boat to 'steer' instead of slide around
+		
+	*/
 	sf::Vector2f mDirectionVec;
+	std::array<Gun*, 2> mGuns;
 };

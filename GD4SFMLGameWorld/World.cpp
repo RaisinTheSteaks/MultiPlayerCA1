@@ -19,7 +19,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 	, mSpawnPosition(mCamera.getSize().x / 2.f, mWorldBounds.height - mCamera.getSize().y / 2.f)
 	, mScrollSpeed(-50.f)
 	, mPlayerShip(nullptr)
-	, mPlayer1ForwardGun(nullptr)
+	, mPlayerGuns()
 	, mEnemySpawnPoints()
 	, mActiveEnemies()
 {
@@ -225,16 +225,22 @@ void World::buildScene()
 	mSceneGraph.attachChild(std::move(soundNode));
 
 	// Add player's Ship
+	/*
+	Player Ship is added to the lower air layer. All boats and projectiles will be added here.
+	Forward Gun is a child of the player ship so it moves with the ship.
+	Forward Gun gets drawn on top of the ship.
+
+	*/
 	std::unique_ptr<Ship> player(new Ship(ShipID::Battleship, mTextures, mFonts));
 	mPlayerShip = player.get();
 	mPlayerShip->setPosition(mSpawnPosition);
 	mSceneLayers[static_cast<int>(LayerID::LowerAir)]->attachChild(std::move(player));
 
 	std::unique_ptr<Gun> player1ForwardGun(new Gun(mPlayerShip->getType(),mTextures));
-	mPlayer1ForwardGun = player1ForwardGun.get();
-	sf::Vector2f offset(50.f, 0.f);
-	mPlayer1ForwardGun->setPosition(offset);
-	mSceneLayers[static_cast<int>(LayerID::UpperAir)]->attachChild(std::move(player1ForwardGun));
+	mPlayerGuns[0] = player1ForwardGun.get();
+	sf::Vector2f offset(0.f, -35.f);
+	mPlayerGuns[0]->setPosition(offset);
+	mPlayerShip->attachChild(std::move(player1ForwardGun));
 
 	//adding island(s) 
 	// will add collision later for islands

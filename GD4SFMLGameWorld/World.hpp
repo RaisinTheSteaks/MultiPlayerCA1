@@ -87,7 +87,16 @@ private:
 	sf::Vector2f mSpawnPosition;
 	float mScrollSpeed;
 	Ship* mPlayerShip;
-	Gun* mPlayer1ForwardGun;
+	/*
+	Joshua Corcoran
+	D00190830
+	_____________
+	Going to use this array to store all guns to be used in the game. 
+	Will use a similar approach to store all players in later iterations of the game
+	Will change the approach to not use magic numbers, but instead, the number of players in the game
+	May possibly change the number of guns on each ship
+	*/
+	std::array<Gun*,2>mPlayerGuns;
 
 	std::vector<SpawnPoint>	mEnemySpawnPoints;
 	std::vector<Ship*> mActiveEnemies;
