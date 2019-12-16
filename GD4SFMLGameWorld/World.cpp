@@ -223,6 +223,7 @@ void World::buildScene()
 	}
 
 	// Prepare the tiled background
+#pragma region Background
 
 	sf::Texture& texture = mTextures.get(TextureID::Ocean);
 	sf::IntRect textureRect(mWorldBounds);
@@ -235,6 +236,7 @@ void World::buildScene()
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(backgroundSprite));
+#pragma endregion
 
 	////Add the finish line to the scene
 	//sf::Texture& finishTexture = mTextures.get(TextureID::FinishLine);

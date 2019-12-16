@@ -25,6 +25,7 @@ Application::Application()
 	mWindow.setKeyRepeatEnabled(false);
 
 	mFonts.load(FontID::Main, "Media/Sansation.ttf");
+	mFonts.load(FontID::Alternate, "Media/Alternative.ttf");
 	mTextures.load(TextureID::TitleScreen, "Media/Textures/battleShip.jpg");
 	mTextures.load(TextureID::Buttons, "Media/Textures/Buttons.png");
 	mStatisticText.setFont(mFonts.get(FontID::Main));

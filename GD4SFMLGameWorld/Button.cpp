@@ -6,7 +6,7 @@
 GUI::Button::Button(State::Context context)
 	:mCallback()
 	, mSprite(context.textures->get(TextureID::Buttons))
-	, mText("", context.fonts->get(FontID::Main), 16)
+	, mText("", context.fonts->get(FontID::Alternate), 16)
 	, mIsToggle(false)
 	, mSounds(*context.sounds)
 {
