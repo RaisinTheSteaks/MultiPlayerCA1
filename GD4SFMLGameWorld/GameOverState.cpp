@@ -18,7 +18,9 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 
 	mGameOverText.setFont(font);
 	if (context.player->getMissionStatus() == MissionStatusID::MissionFailure)
-		mGameOverText.setString("Mission failed!");
+		mGameOverText.setString("Player 2 Wins");
+	else if (context.player2->getMissionStatus() == MissionStatusID::MissionFailure)
+		mGameOverText.setString("Player 1 Wins");
 	else
 		mGameOverText.setString("Mission successful!");
 

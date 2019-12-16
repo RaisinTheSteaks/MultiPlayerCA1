@@ -36,6 +36,8 @@ public:
 	void draw();
 	CommandQueue& getCommandQueue();
 	bool hasAlivePlayer() const;
+	bool hasAlivePlayer1() const;
+	bool hasAlivePlayer2() const;
 	bool hasPlayerReachedEnd() const;
 	void updateSounds();
 
@@ -97,6 +99,8 @@ private:
 	May possibly change the number of guns on each ship
 	*/
 	std::array<Gun*,2>mPlayerGuns;
+
+	Ship* mPlayerShip2;
 	std::vector<SpawnPoint>	mEnemySpawnPoints;
 	std::vector<Ship*> mActiveEnemies;
 
