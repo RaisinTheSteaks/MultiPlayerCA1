@@ -14,6 +14,8 @@
 #include "SoundNode.hpp"
 #include "SoundPlayer.hpp"
 #include "Gun.hpp"
+#include "Island.hpp"
+#include "IslandID.hpp"
 #include "SFML/System/NonCopyable.hpp"
 #include "SFML/Graphics/View.hpp"
 #include "SFML/Graphics/Texture.hpp"
@@ -99,8 +101,8 @@ private:
 	May possibly change the number of guns on each ship
 	*/
 	std::array<Gun*,2>mPlayerGuns;
-
 	Ship* mPlayerShip2;
+	std::array<Island*,3>mIsland;
 	std::vector<SpawnPoint>	mEnemySpawnPoints;
 	std::vector<Ship*> mActiveEnemies;
 

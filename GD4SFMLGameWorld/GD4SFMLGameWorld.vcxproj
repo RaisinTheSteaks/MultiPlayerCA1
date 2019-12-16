@@ -153,6 +153,8 @@
     <ClInclude Include="GameOverState.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="Gun.hpp" />
+    <ClInclude Include="Island.hpp" />
+    <ClInclude Include="IslandID.hpp" />
     <ClInclude Include="Label.hpp" />
     <ClInclude Include="LayerID.hpp" />
     <ClInclude Include="MenuState.hpp" />
@@ -207,6 +209,7 @@
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="Island.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />

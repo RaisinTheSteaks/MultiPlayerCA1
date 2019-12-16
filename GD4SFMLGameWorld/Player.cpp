@@ -17,21 +17,15 @@ namespace
 
 struct ShipMover
 {
-	ShipMover(float rotation , float acceleration):
-		rotation(rotation),
-		acceleration(acceleration)
+	ShipMover(float vx, float vy) : velocity(vx, vy) {}
+
+	void operator()(Ship& ship, sf::Time) const
 	{
+		ship.accelerate(velocity * ship.getMaxSpeed());
 	}
 
-	void operator() (Ship& Ship, sf::Time) const
-	{
-		sf::Vector2f velocity = Ship.getDirectionVec();
-		velocity *= Ship.getMaxSpeed()*acceleration;
 
-		Ship.accelerate(velocity);
-		Ship.setRotation(Ship.getRotation()*rotation);
-	}
-	float rotation, acceleration;
+	sf::Vector2f velocity;
 };
 
 Player::Player(PlayerID type) : mCurrentMissionStatus(MissionStatusID::MissionRunning), mType(type)
