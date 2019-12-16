@@ -224,6 +224,8 @@ void World::buildScene()
 	std::unique_ptr<SoundNode> soundNode(new SoundNode(mSounds));
 	mSceneGraph.attachChild(std::move(soundNode));
 
+#pragma region Josh Code
+
 	// Add player's Ship
 	/*
 	Player Ship is added to the lower air layer. All boats and projectiles will be added here.
@@ -236,11 +238,14 @@ void World::buildScene()
 	mPlayerShip->setPosition(mSpawnPosition);
 	mSceneLayers[static_cast<int>(LayerID::LowerAir)]->attachChild(std::move(player));
 
-	std::unique_ptr<Gun> player1ForwardGun(new Gun(mPlayerShip->getType(),mTextures));
+	std::unique_ptr<Gun> player1ForwardGun(new Gun(mPlayerShip->getType(), mTextures));
 	mPlayerGuns[0] = player1ForwardGun.get();
 	sf::Vector2f offset(0.f, -35.f);
 	mPlayerGuns[0]->setPosition(offset);
 	mPlayerShip->attachChild(std::move(player1ForwardGun));
+
+	mPlayerShip->addGun(mPlayerGuns[0]);
+#pragma endregion
 
 	//adding island(s) 
 	// will add collision later for islands

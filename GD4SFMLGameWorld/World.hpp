@@ -97,7 +97,6 @@ private:
 	May possibly change the number of guns on each ship
 	*/
 	std::array<Gun*,2>mPlayerGuns;
-
 	std::vector<SpawnPoint>	mEnemySpawnPoints;
 	std::vector<Ship*> mActiveEnemies;
 

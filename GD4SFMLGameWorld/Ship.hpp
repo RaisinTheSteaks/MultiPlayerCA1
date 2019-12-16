@@ -6,7 +6,7 @@
 #include "TextNode.hpp"
 #include "Projectile.hpp"
 #include "Animation.hpp"
-
+#include <array>
 //Including gun instead of forward declaring to make sure that I can access the gun's fire method
 #include "Gun.hpp"
 
@@ -19,6 +19,7 @@ public:
 	virtual bool isMarkedForRemoval() const;
 
 	ShipID getType();
+	void addGun(Gun* gun);
 
 	float getMaxSpeed() const;
 	void fire();
@@ -80,5 +81,5 @@ private:
 		
 	*/
 	sf::Vector2f mDirectionVec;
-	std::array<Gun*, 2> mGuns;
+	std::array<Gun*,2>mGuns;
 };
