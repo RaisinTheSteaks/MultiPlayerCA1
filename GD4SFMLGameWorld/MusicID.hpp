@@ -2,5 +2,6 @@
 enum class MusicID
 {
 	MenuTheme,
-	MissionTheme
+	MissionTheme,
+	AltMenuTheme
 };

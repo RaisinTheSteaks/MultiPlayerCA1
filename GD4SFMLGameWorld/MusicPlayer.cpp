@@ -7,6 +7,7 @@ MusicPlayer::MusicPlayer()
 {
 	mFilenames[MusicID::MenuTheme] = "Media/Music/MenuTheme.ogg";
 	mFilenames[MusicID::MissionTheme] = "Media/Music/MissionTheme.ogg";
+	mFilenames[MusicID::AltMenuTheme] = "Media/Music/battleShipTrack.ogg";
 }
 
 void MusicPlayer::play(MusicID theme)
