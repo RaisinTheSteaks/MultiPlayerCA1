@@ -3,12 +3,10 @@
 #include "Ship.hpp"
 #include "ActionID.hpp"
 #include "DataTables.hpp"
-
 #include <map>
 #include <string>
 #include <algorithm>
 #include <iostream>
-
 
 namespace
 {
@@ -17,7 +15,7 @@ namespace
 
 struct ShipMover
 {
-	ShipMover(float rotation , float acceleration):
+	ShipMover(float rotation, float acceleration) :
 		rotation(rotation),
 		acceleration(acceleration)
 	{
@@ -25,11 +23,52 @@ struct ShipMover
 
 	void operator() (Ship& Ship, sf::Time) const
 	{
-		sf::Vector2f velocity = Ship.getDirectionVec();
-		velocity *= Ship.getMaxSpeed()*acceleration;
+		float yVel = 0.f;
+		//Citation
+		/* 
+		Joshua  Corcoran
+		D00190830
+		____________
+		Code adapted from sfml forum on moving in direction of rotation
+		https://en.sfml-dev.org/forums/index.php?topic=544.0
+		*/
 
-		Ship.accelerate(velocity);
-		Ship.setRotation(Ship.getRotation()*rotation);
+		/*
+		Calculating the radians of the current rotation, and then cos/sin (ing) the angle to find the distance you need to move in each angle
+		*/
+		float curRot = Ship.getRotation();
+		float pi = 3.14159265;
+		sf::Vector2f velocity;
+		
+		if (acceleration < 0)
+		{
+			velocity.y = cos(curRot*pi / 180) * 1;
+			velocity.x = sin(curRot*pi / 180) * -1;
+		}
+		else if (acceleration > 0)
+		{
+			velocity.y = cos(curRot*pi / 180)*-1;
+			velocity.x = sin(curRot*pi / 180) * 1;
+		}
+
+		//Trying to get a slow deceleration
+		//else if (acceleration== 0)
+		//{
+		//	velocity = Ship.getDirectionVec() * 0.5f;
+		//}
+
+		if (rotation > 0)
+		{
+			Ship.setRotation(Ship.getRotation() + Ship.getTurnSpeed());
+		}
+		else if (rotation < 0)
+		{
+			Ship.setRotation(Ship.getRotation() - Ship.getTurnSpeed());
+		}
+		//std::cout << "Curr X [" << velocity.x << "] Curr Y [" << velocity.y << "]\n";
+
+		Ship.accelerate(velocity*Ship.getMaxSpeed());
+		Ship.setDirectionVec(velocity);
 	}
 	float rotation, acceleration;
 };
@@ -38,6 +77,8 @@ Player::Player(PlayerID type) : mCurrentMissionStatus(MissionStatusID::MissionRu
 {
 
 	mKeyBinding = Table[static_cast<int>(mType)].mKeyBinding;
+
+	///Moved to the DataTables.cpp
 	//// Set initial key bindings
 	//mKeyBinding[sf::Keyboard::A] = ActionID::MoveLeft;
 	//mKeyBinding[sf::Keyboard::D] = ActionID::MoveRight;

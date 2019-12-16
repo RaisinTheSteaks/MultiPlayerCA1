@@ -123,7 +123,7 @@ void World::loadTextures()
 
 	//Assets sourced from:
 	//https://opengameart.org/content/water
-	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/Water1.png");
+	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/water1.png");
 	//https://opengameart.org/content/sea-warfare-set-ships-and-more
 	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHullTest.png");
 	mTextures.load(TextureID::BattleshipGun, "Media/Textures/Battleship/WeaponBattleshipStandardGun.png");
@@ -195,6 +195,10 @@ void World::handleCollisions()
 		{
 			auto& ship = static_cast<Ship&>(*pair.first);
 			auto& projectile = static_cast<Projectile&>(*pair.second);
+			/*
+			[TODO] ADD SHADER STUFF
+			*/
+
 
 			// Apply projectile damage to Ship, destroy projectile
 			ship.damage(projectile.getDamage());
@@ -232,11 +236,11 @@ void World::buildScene()
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(backgroundSprite));
 
-	//Add the finish line to the scene
-	sf::Texture& finishTexture = mTextures.get(TextureID::FinishLine);
-	std::unique_ptr<SpriteNode> finishSprite(new SpriteNode(finishTexture));
-	finishSprite->setPosition(0.f, -76.f);
-	mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(finishSprite));
+	////Add the finish line to the scene
+	//sf::Texture& finishTexture = mTextures.get(TextureID::FinishLine);
+	//std::unique_ptr<SpriteNode> finishSprite(new SpriteNode(finishTexture));
+	//finishSprite->setPosition(0.f, -76.f);
+	//mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(finishSprite));
 
 	//Add particle nodes for smoke and propellant
 	std::unique_ptr<ParticleNode> smokeNode(new ParticleNode(ParticleID::Smoke, mTextures));
@@ -295,7 +299,7 @@ void World::buildScene()
 
 
 
-	addEnemies();
+	//addEnemies();
 }
 
 void World::adaptPlayerPosition()
@@ -335,7 +339,7 @@ void World::adaptPlayerVelocity()
 		mPlayerShip2->setVelocity(velocity2 / std::sqrt(2.f));
 
 	// Add scrolling velocity
-	//mPlayerShip->accelerate(0.f, mScrollSpeed);
+	//mPlayerShip->accelerate(mPlayerShip->getVelocity());
 }
 
 void World::addEnemies()

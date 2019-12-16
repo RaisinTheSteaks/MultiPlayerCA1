@@ -22,6 +22,7 @@ public:
 	void addGun(Gun* gun);
 
 	float getMaxSpeed() const;
+	float getTurnSpeed() const;
 	void fire();
 	void launchMissile();
 	bool isAllied() const;

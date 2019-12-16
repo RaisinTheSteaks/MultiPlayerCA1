@@ -196,6 +196,11 @@ float Ship::getMaxSpeed() const
 	return Table[static_cast<int>(mType)].speed;
 }
 
+float Ship::getTurnSpeed() const
+{
+	return Table[static_cast<int>(mType)].turnSpeed;
+}
+
 void Ship::increaseFireRate()
 {
 	if (mFireRateLevel < 10)

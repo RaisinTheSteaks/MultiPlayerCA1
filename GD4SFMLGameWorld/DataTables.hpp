@@ -37,6 +37,7 @@ struct ShipData
 {
 	int hitpoints;
 	float speed;
+	float turnSpeed;
 	TextureID texture;
 	sf::IntRect textureRect;
 	sf::Time fireInterval;

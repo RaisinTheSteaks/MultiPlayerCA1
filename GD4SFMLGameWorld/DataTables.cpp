@@ -34,21 +34,26 @@ std::vector<PlayerData> initializePlayerData()
 }
 std::vector<ShipData> initializeShipData()
 {
+	float playerSpeed = 125.f;
+	int playerFireRate = 3;
 	std::vector<ShipData> data(static_cast<int>(ShipID::TypeCount));
 	data[static_cast<int>(ShipID::Battleship)].hitpoints = 100;
-	data[static_cast<int>(ShipID::Battleship)].speed = 200.f;
-	data[static_cast<int>(ShipID::Battleship)].fireInterval = sf::seconds(1);
+	data[static_cast<int>(ShipID::Battleship)].speed = playerSpeed;
+	data[static_cast<int>(ShipID::Battleship)].fireInterval = sf::seconds(playerFireRate);
 	data[static_cast<int>(ShipID::Battleship)].textureRect = sf::IntRect(0, 0, 25, 169);
 	data[static_cast<int>(ShipID::Battleship)].texture = TextureID::Battleship;
 	data[static_cast<int>(ShipID::Battleship)].hasRollAnimation = false;
+	data[static_cast<int>(ShipID::Battleship)].turnSpeed = 0.7f;
 
 	data[static_cast<int>(ShipID::Battleship2)].hitpoints = 100;
-	data[static_cast<int>(ShipID::Battleship2)].speed = 200.f;
-	data[static_cast<int>(ShipID::Battleship2)].fireInterval = sf::seconds(1);
+	data[static_cast<int>(ShipID::Battleship2)].speed = playerSpeed;
+	data[static_cast<int>(ShipID::Battleship2)].fireInterval = sf::seconds(playerFireRate);
 	data[static_cast<int>(ShipID::Battleship2)].textureRect = sf::IntRect(0, 0, 25, 169);
 	data[static_cast<int>(ShipID::Battleship2)].texture = TextureID::Battleship;
 	data[static_cast<int>(ShipID::Battleship2)].hasRollAnimation = false;
+	data[static_cast<int>(ShipID::Battleship2)].turnSpeed = 0.7f;
 
+#pragma region Aircraft
 	data[static_cast<int>(ShipID::Raptor)].hitpoints = 20;
 	data[static_cast<int>(ShipID::Raptor)].speed = 80.f;
 	data[static_cast<int>(ShipID::Raptor)].fireInterval = sf::Time::Zero;
@@ -72,7 +77,7 @@ std::vector<ShipData> initializeShipData()
 	data[static_cast<int>(ShipID::Avenger)].directions.push_back(Direction(+45.f, 50.f));
 	data[static_cast<int>(ShipID::Avenger)].hasRollAnimation = false;
 
-
+#pragma endregion
 	return data;
 }
 
@@ -80,13 +85,15 @@ std::vector<ProjectileData> initializeProjectileData()
 {
 	std::vector<ProjectileData> data(static_cast<int>(ProjectileID::TypeCount));
 
-	data[static_cast<int>(ProjectileID::AlliedBullet)].damage = 10;
-	data[static_cast<int>(ProjectileID::AlliedBullet)].speed = 300.f;
+	float bulletSpeed = 350.f;
+	
+	data[static_cast<int>(ProjectileID::AlliedBullet)].damage = 25;
+	data[static_cast<int>(ProjectileID::AlliedBullet)].speed = bulletSpeed;
 	data[static_cast<int>(ProjectileID::AlliedBullet)].texture = TextureID::Entities;
 	data[static_cast<int>(ProjectileID::AlliedBullet)].textureRect = sf::IntRect(175, 64, 3, 14);
 
 	data[static_cast<int>(ProjectileID::EnemyBullet)].damage = 10;
-	data[static_cast<int>(ProjectileID::EnemyBullet)].speed = 300.f;
+	data[static_cast<int>(ProjectileID::EnemyBullet)].speed = bulletSpeed;
 	data[static_cast<int>(ProjectileID::EnemyBullet)].texture = TextureID::Entities;
 	data[static_cast<int>(ProjectileID::EnemyBullet)].textureRect = sf::IntRect(175, 64, 3, 14);
 
