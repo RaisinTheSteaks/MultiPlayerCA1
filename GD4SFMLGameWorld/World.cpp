@@ -5,6 +5,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 
+#include "EmitterNode.hpp"
 
 World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds)
 	: mTarget(outputTarget)
@@ -187,6 +188,12 @@ void World::handleCollisions()
 
 			// Apply projectile damage to Ship, destroy projectile
 			ship.damage(projectile.getDamage());
+
+			std::unique_ptr<EmitterNode> smoke(new EmitterNode(ParticleID::Smoke));
+			smoke->setPosition(0.f, ship.getBoundingRect().height / 2.f);
+			ship.attachChild(std::move(smoke));
+
+
 			projectile.destroy();
 		}
 

@@ -12,6 +12,7 @@ class Projectile : public Entity
 {
 public:
 	Projectile(ProjectileID type, const TextureHolder& textures);
+	Projectile(ProjectileID type, const TextureHolder& textures, float rotation);
 
 	void					guideTowards(sf::Vector2f position);
 	bool					isGuided() const;
@@ -20,7 +21,8 @@ public:
 	virtual sf::FloatRect	getBoundingRect() const;
 	float					getMaxSpeed() const;
 	int						getDamage() const;
-
+	void					setMRotation(float rotation);
+	float					getMRotation();
 
 private:
 	virtual void			updateCurrent(sf::Time dt, CommandQueue& commands);
@@ -31,4 +33,5 @@ private:
 	ProjectileID			mType;
 	sf::Sprite				mSprite;
 	sf::Vector2f			mTargetDirection;
+	float					mRotation;
 };

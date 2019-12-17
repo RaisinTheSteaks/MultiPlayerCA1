@@ -52,11 +52,11 @@ struct ShipMover
 		}
 
 		//Trying to get a slow deceleration
-		//else if (acceleration== 0)
-		//{
-		//	velocity = Ship.getDirectionVec() * 0.5f;
-		//}
-
+		/*else if (acceleration== 0)
+		{
+			velocity = Ship.getDirectionVec() - (Ship.getDirectionVec()*0.1f);
+		}
+*/
 		if (rotation > 0)
 		{
 			Ship.setRotation(Ship.getRotation() + Ship.getTurnSpeed());
