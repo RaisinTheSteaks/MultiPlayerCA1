@@ -4,7 +4,7 @@
 #include "TextureID.hpp"
 #include "ActionID.hpp"
 #include "CategoryID.hpp"
-
+#include "IslandID.hpp"
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Graphics/Color.hpp>
@@ -16,6 +16,7 @@
 #include <map>
 
 class Ship;
+class Island;
 
 struct PlayerData
 {
@@ -31,6 +32,13 @@ struct Direction
 
 	float angle;
 	float distance;
+};
+
+struct IslandData 
+{
+	TextureID texture;
+	sf::IntRect textureRect;
+	CategoryID categoryID;
 };
 
 struct ShipData
@@ -67,6 +75,7 @@ struct ParticleData
 };
 
 std::vector<PlayerData> initializePlayerData();
+std::vector<IslandData> initializeIslandData();
 std::vector<ShipData> initializeShipData();
 std::vector<ProjectileData> initializeProjectileData();
 std::vector<PickupData> initializePickupData();

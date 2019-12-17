@@ -19,6 +19,7 @@ struct ShipMover
 		rotation(rotation),
 		acceleration(acceleration)
 	{
+		ship.accelerate(velocity * ship.getMaxSpeed());
 	}
 
 	void operator() (Ship& Ship, sf::Time) const
@@ -71,6 +72,7 @@ struct ShipMover
 		Ship.setDirectionVec(velocity);
 	}
 	float rotation, acceleration;
+
 };
 
 Player::Player(PlayerID type) : mCurrentMissionStatus(MissionStatusID::MissionRunning), mType(type)
