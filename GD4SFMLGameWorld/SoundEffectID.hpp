@@ -7,5 +7,6 @@ enum class SoundEffectID
 	Explosion2,
 	LaunchMissile,
 	CollectPickup,
-	Button
+	Button,
+	Scream
 };

@@ -221,6 +221,7 @@ void World::handleCollisions()
 			auto& island = static_cast<Island&>(*pair.second);
 			
 			//island.destroy();
+			ship.playerLocalSound(mCommandQueue, SoundEffectID::Scream);
 			std::cout << "Hit Island!" << std::endl;
 			ship.damage(100);
 		}
