@@ -25,6 +25,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 	, mIsland()
 	, mEnemySpawnPoints()
 	, mActiveEnemies()
+	, mSpawnPositions()
 {
 	mSceneTexture.create(mTarget.getSize().x, mTarget.getSize().y);
 	loadTextures();
@@ -207,7 +208,6 @@ void World::handleCollisions()
 			[TODO] ADD SHADER STUFF
 			*/
 
-
 			// Apply projectile damage to Ship, destroy projectile
 			ship.damage(projectile.getDamage());
 			projectile.destroy();
@@ -286,6 +286,11 @@ void World::buildScene()
 	mSceneGraph.attachChild(std::move(soundNode));
 
 
+	//Spawn Points
+	sf::Vector2f spawnPoint1(50.f, 50.f);
+	sf::Vector2f spawnPoint2(600.f, 100.f);
+	mSpawnPositions[0] = spawnPoint1;
+	mSpawnPositions[1] = spawnPoint2;
 
 	// Add player's Ship
 	/*
@@ -296,7 +301,8 @@ void World::buildScene()
 	*/
 	std::unique_ptr<Ship> player(new Ship(ShipID::Battleship, mTextures, mFonts));
 	mPlayerShip = player.get();
-	mPlayerShip->setPosition(mSpawnPosition);
+	mPlayerShip->setPosition(mSpawnPositions[0]);
+	mPlayerShip->setRotation(180.f);
 	mSceneLayers[static_cast<int>(LayerID::LowerAir)]->attachChild(std::move(player));
 
 #pragma region Josh Code
@@ -313,7 +319,8 @@ void World::buildScene()
 	// Add player2's Ship
 	std::unique_ptr<Ship> player2(new Ship(ShipID::Battleship2, mTextures, mFonts));
 	mPlayerShip2 = player2.get();
-	mPlayerShip2->setPosition(mSpawnPosition + sf::Vector2f(100, 0));
+	mPlayerShip2->setPosition(mSpawnPositions[1]);
+	mPlayerShip2->setRotation(180.f);
 	mSceneLayers[static_cast<int>(LayerID::LowerAir)]->attachChild(std::move(player2));
 	
 	

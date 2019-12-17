@@ -16,6 +16,7 @@ public:
 	Ship(ShipID type, const TextureHolder& textures, const FontHolder& fonts);
 	virtual unsigned int getCategory() const;
 	virtual sf::FloatRect getBoundingRect() const;
+
 	virtual bool isMarkedForRemoval() const;
 
 	ShipID getType();

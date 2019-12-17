@@ -19,7 +19,6 @@ struct ShipMover
 		rotation(rotation),
 		acceleration(acceleration)
 	{
-		ship.accelerate(velocity * ship.getMaxSpeed());
 	}
 
 	void operator() (Ship& Ship, sf::Time) const
@@ -61,10 +60,13 @@ struct ShipMover
 		if (rotation > 0)
 		{
 			Ship.setRotation(Ship.getRotation() + Ship.getTurnSpeed());
+			Ship.getBoundingRect();
+
 		}
 		else if (rotation < 0)
 		{
 			Ship.setRotation(Ship.getRotation() - Ship.getTurnSpeed());
+			Ship.getBoundingRect();
 		}
 		//std::cout << "Curr X [" << velocity.x << "] Curr Y [" << velocity.y << "]\n";
 

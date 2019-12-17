@@ -10,7 +10,7 @@
 const sf::Time Application::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Application::Application()
-	: mWindow(sf::VideoMode(1280, 960), "Game Play", sf::Style::Close)
+	: mWindow(sf::VideoMode(1280, 960), "Sea++", sf::Style::Close)
 	, mTextures()
 	, mFonts()
 	, mPlayer(PlayerID::Player1)

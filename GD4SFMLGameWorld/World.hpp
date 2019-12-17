@@ -50,6 +50,7 @@ private:
 	void adaptPlayerVelocity();
 	void handleCollisions();
 
+
 	void spawnEnemies();
 	void addEnemies();
 	void addEnemy(ShipID type, float relX, float relY);
@@ -89,6 +90,7 @@ private:
 
 	sf::FloatRect mWorldBounds;
 	sf::Vector2f mSpawnPosition;
+	std::array<sf::Vector2f, 2>mSpawnPositions;
 	float mScrollSpeed;
 	Ship* mPlayerShip;
 	/*
