@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "ParticleNode.hpp"
 #include "DataTables.hpp"
 #include "ResourceHolder.hpp"

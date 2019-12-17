@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "Label.hpp"
 
 #include <SFML/Graphics/RenderTarget.hpp>

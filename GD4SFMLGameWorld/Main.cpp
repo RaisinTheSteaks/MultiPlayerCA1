@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include <stdexcept>
 #include <iostream>
 #include "Application.hpp"

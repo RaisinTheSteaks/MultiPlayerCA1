@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "Player.hpp"
 #include "CommandQueue.hpp"
 #include "Ship.hpp"
@@ -79,7 +83,7 @@ struct ShipMover
 
 Player::Player(PlayerID type) : mCurrentMissionStatus(MissionStatusID::MissionRunning), mType(type)
 {
-
+	//using key bindings from vector playerdata rather than player class, allows for multiple players to have different key bindings
 	mKeyBinding = Table[static_cast<int>(mType)].mKeyBinding;
 
 	///Moved to the DataTables.cpp

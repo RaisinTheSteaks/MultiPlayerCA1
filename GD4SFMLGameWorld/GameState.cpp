@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "GameState.hpp"
 
 GameState::GameState(StateStack& stack, Context context)
@@ -19,7 +23,7 @@ void GameState::draw()
 bool GameState::update(sf::Time dt)
 {
 	mWorld.update(dt);
-
+	//checks if player 1/2 is alive
 	if (!mWorld.hasAlivePlayer1())
 	{
 		mPlayer.setMissionStatus(MissionStatusID::MissionFailure);

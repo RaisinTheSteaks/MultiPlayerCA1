@@ -3,6 +3,11 @@ Joshua Corcoran
 D00190830 
 Added full file
 */
+/*
+Charlie Duff
+D00183790
+*/
+
 #include "Gun.hpp"
 #include "ResourceHolder.hpp"
 #include "CategoryID.hpp"

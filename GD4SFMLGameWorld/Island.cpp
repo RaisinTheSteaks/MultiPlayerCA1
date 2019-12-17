@@ -1,8 +1,15 @@
+/*
+Charlie Duff
+D00183790
+added full file
+*/
 #include "Island.hpp"
 #include "ResourceHolder.hpp"
 #include "CategoryID.hpp"
 #include "DataTables.hpp"
 
+
+//added island vector to store island sizes, textureIDs, and categoryIDs
 namespace
 {
 	const std::vector<IslandData> Table = initializeIslandData();

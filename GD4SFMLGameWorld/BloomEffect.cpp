@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "BloomEffect.hpp"
 
 BloomEffect::BloomEffect()

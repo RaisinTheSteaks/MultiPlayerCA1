@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "Ship.hpp"
 #include "ResourceHolder.hpp"
 #include "DataTables.hpp"

@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #pragma once
 #include <sstream>
 #include <SFML/System/Vector2.hpp>

@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "Projectile.hpp"
 #include "DataTables.hpp"
 #include "Utility.hpp"

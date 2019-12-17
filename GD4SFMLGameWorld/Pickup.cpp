@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "Pickup.hpp"
 #include "DataTables.hpp"
 #include "CategoryID.hpp"

@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "GameOverState.hpp"
 #include "Utility.hpp"
 #include "Player.hpp"
@@ -16,6 +20,7 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 	sf::Font& font = context.fonts->get(FontID::Main);
 	sf::Vector2f windowSize(context.window->getSize());
 
+	//game over conditions
 	mGameOverText.setFont(font);
 	if (context.player->getMissionStatus() == MissionStatusID::MissionFailure)
 		mGameOverText.setString("Player 2 Wins");

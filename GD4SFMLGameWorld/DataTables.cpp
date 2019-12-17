@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "DataTables.hpp"
 #include "Ship.hpp"
 #include "Projectile.hpp"
@@ -11,7 +15,7 @@
 #include "Island.hpp"
 
 
-
+//vector playerdata to store player keybindings and category, allows player 1 & 2 to have different keybindings, category, and textures 
 std::vector<PlayerData> initializePlayerData()
 {
 	std::vector<PlayerData> data(static_cast<int>(PlayerID::TypeCount));
@@ -34,7 +38,7 @@ std::vector<PlayerData> initializePlayerData()
 
 	return data;
 }
-
+//vector island data to store island texture and category
 std::vector<IslandData> initializeIslandData()
 {
 	std::vector<IslandData> data(static_cast<int>(IslandID::IslandCount));

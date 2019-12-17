@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "World.hpp"
 #include "ParticleID.hpp"
 #include "ParticleNode.hpp"
@@ -39,6 +43,8 @@ void World::update(sf::Time dt)
 {
 	// Scroll the world, reset player velocity
 	//mCamera.move(0.f, mScrollSpeed * dt.asSeconds());
+	
+	//both players velocity is reset
 	mPlayerShip->setVelocity(0.f, 0.f);
 	mPlayerShip2->setVelocity(0.f, 0.f);
 	// Setup commands to destroy entities, and guide missiles
@@ -88,11 +94,13 @@ CommandQueue& World::getCommandQueue()
 
 bool World::hasAlivePlayer() const
 {
+	
 	return !mPlayerShip->isMarkedForRemoval() && !mPlayerShip2->isMarkedForRemoval();
 }
 
 bool World::hasAlivePlayer1() const
 {
+	
 	return !mPlayerShip->isMarkedForRemoval();
 }
 
@@ -221,6 +229,7 @@ void World::handleCollisions()
 			auto& island = static_cast<Island&>(*pair.second);
 			
 			//island.destroy();
+			//plays sound for when player collides with island
 			ship.playerLocalSound(mCommandQueue, SoundEffectID::Scream);
 			std::cout << "Hit Island!" << std::endl;
 			ship.damage(100);

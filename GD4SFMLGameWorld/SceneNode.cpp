@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "SceneNode.hpp"
 #include "Command.hpp"
 #include "Utility.hpp"

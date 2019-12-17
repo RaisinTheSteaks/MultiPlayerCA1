@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 template<typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename)
 {

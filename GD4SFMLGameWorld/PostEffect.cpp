@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #include "PostEffect.hpp"
 
 #include <SFML/Graphics/Shader.hpp>

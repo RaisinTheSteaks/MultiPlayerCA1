@@ -1,3 +1,7 @@
+/*
+Charlie Duff
+D00183790
+*/
 #pragma once
 
 #include <SFML/System/NonCopyable.hpp>
