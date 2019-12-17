@@ -90,11 +90,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>M:\College\Year 4\MultiPlayer\SFML-2.5.1 64\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\sfml\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>M:\College\Year 4\MultiPlayer\SFML-2.5.1 64\SFML-2.5.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\sfml\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -161,6 +161,7 @@
     <ClInclude Include="MissionStatusID.hpp" />
     <ClInclude Include="MusicID.hpp" />
     <ClInclude Include="MusicPlayer.hpp" />
+    <ClInclude Include="NewEffect.hpp" />
     <ClInclude Include="OptionID.hpp" />
     <ClInclude Include="Particle.hpp" />
     <ClInclude Include="ParticleID.hpp" />
@@ -214,6 +215,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
+    <ClCompile Include="NewEffect.cpp" />
     <ClCompile Include="ParticleNode.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Pickup.cpp" />

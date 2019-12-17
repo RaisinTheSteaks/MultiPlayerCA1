@@ -20,6 +20,8 @@ D00183790
 #include "Gun.hpp"
 #include "Island.hpp"
 #include "IslandID.hpp"
+#include "NewEffect.hpp"
+
 #include "SFML/System/NonCopyable.hpp"
 #include "SFML/Graphics/View.hpp"
 #include "SFML/Graphics/Texture.hpp"
@@ -113,4 +115,5 @@ private:
 	std::vector<Ship*> mActiveEnemies;
 
 	BloomEffect	mBloomEffect;
+	NewEffect mNewEffect;
 };

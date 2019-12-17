@@ -80,7 +80,8 @@ void World::draw()
 		mSceneTexture.setView(mCamera);
 		mSceneTexture.draw(mSceneGraph);
 		mSceneTexture.display();
-		mBloomEffect.apply(mSceneTexture, mTarget);
+		//mBloomEffect.apply(mSceneTexture, mTarget);
+		mNewEffect.apply(mSceneTexture, mTarget);
 	}
 	else
 	{
