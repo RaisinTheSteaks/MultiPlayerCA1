@@ -5,6 +5,7 @@
 
 #include <iostream>
 
+#include "EmitterNode.hpp"
 
 World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds)
 	: mTarget(outputTarget)
@@ -124,7 +125,7 @@ void World::loadTextures()
 
 	//Assets sourced from:
 	//https://opengameart.org/content/water
-	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/Water1.png");
+	mTextures.load(TextureID::Ocean, "Media/Textures/Ocean/water1.png");
 	//https://opengameart.org/content/sea-warfare-set-ships-and-more
 	mTextures.load(TextureID::Battleship, "Media/Textures/Battleship/ShipBattleshipHullTest.png");
 	mTextures.load(TextureID::BattleshipGun, "Media/Textures/Battleship/WeaponBattleshipStandardGun.png");
@@ -188,6 +189,12 @@ void World::handleCollisions()
 
 			// Apply projectile damage to Ship, destroy projectile
 			ship.damage(projectile.getDamage());
+
+			std::unique_ptr<EmitterNode> smoke(new EmitterNode(ParticleID::Smoke));
+			smoke->setPosition(0.f, ship.getBoundingRect().height / 2.f);
+			ship.attachChild(std::move(smoke));
+
+
 			projectile.destroy();
 		}
 
@@ -196,6 +203,10 @@ void World::handleCollisions()
 		{
 			auto& ship = static_cast<Ship&>(*pair.first);
 			auto& projectile = static_cast<Projectile&>(*pair.second);
+			/*
+			[TODO] ADD SHADER STUFF
+			*/
+
 
 			// Apply projectile damage to Ship, destroy projectile
 			ship.damage(projectile.getDamage());
@@ -242,6 +253,7 @@ void World::buildScene()
 	}
 
 	// Prepare the tiled background
+#pragma region Background
 
 	sf::Texture& texture = mTextures.get(TextureID::Ocean);
 	sf::IntRect textureRect(mWorldBounds);
@@ -254,12 +266,13 @@ void World::buildScene()
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(backgroundSprite));
+#pragma endregion
 
-	//Add the finish line to the scene
-	sf::Texture& finishTexture = mTextures.get(TextureID::FinishLine);
-	std::unique_ptr<SpriteNode> finishSprite(new SpriteNode(finishTexture));
-	finishSprite->setPosition(0.f, -76.f);
-	mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(finishSprite));
+	////Add the finish line to the scene
+	//sf::Texture& finishTexture = mTextures.get(TextureID::FinishLine);
+	//std::unique_ptr<SpriteNode> finishSprite(new SpriteNode(finishTexture));
+	//finishSprite->setPosition(0.f, -76.f);
+	//mSceneLayers[static_cast<int>(LayerID::Background)]->attachChild(std::move(finishSprite));
 
 	//Add particle nodes for smoke and propellant
 	std::unique_ptr<ParticleNode> smokeNode(new ParticleNode(ParticleID::Smoke, mTextures));
@@ -322,7 +335,7 @@ void World::buildScene()
 	mSceneLayers[static_cast<int>(LayerID::UpperAir)]->attachChild(std::move(Island3));
 
 
-	addEnemies();
+	//addEnemies();
 }
 
 void World::adaptPlayerPosition()
@@ -362,7 +375,7 @@ void World::adaptPlayerVelocity()
 		mPlayerShip2->setVelocity(velocity2 / std::sqrt(2.f));
 
 	// Add scrolling velocity
-	//mPlayerShip->accelerate(0.f, mScrollSpeed);
+	//mPlayerShip->accelerate(mPlayerShip->getVelocity());
 }
 
 void World::addEnemies()

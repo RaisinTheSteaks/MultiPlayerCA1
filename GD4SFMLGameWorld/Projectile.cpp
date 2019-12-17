@@ -29,7 +29,7 @@ Projectile::Projectile(ProjectileID type, const TextureHolder& textures)
 	//Add particle system for system
 	if (isGuided())
 	{
-		std::cout << "IsGuided triggered" << std::endl;
+		//std::cout << "IsGuided triggered" << std::endl;
 		std::unique_ptr<EmitterNode> smoke(new EmitterNode(ParticleID::Smoke));
 		smoke->setPosition(0.f, getBoundingRect().height / 2.f);
 		attachChild(std::move(smoke));
@@ -39,6 +39,12 @@ Projectile::Projectile(ProjectileID type, const TextureHolder& textures)
 		attachChild(std::move(propellant));
 
 	}
+}
+
+Projectile::Projectile(ProjectileID type, const TextureHolder & textures, float rotation):
+	Projectile::Projectile(type, textures)
+{
+	mRotation = rotation;
 }
 
 void Projectile::guideTowards(sf::Vector2f position)
@@ -61,8 +67,13 @@ void Projectile::updateCurrent(sf::Time dt, CommandQueue& commands)
 		sf::Vector2f newVelocity = unitVector(approachRate * dt.asSeconds() * mTargetDirection + getVelocity());
 		newVelocity *= getMaxSpeed();
 		float angle = std::atan2(newVelocity.y, newVelocity.x);
-
-		setRotation(toDegree(angle) + 90.f);
+		/*
+			Joshua Corcoran
+			D00190830
+			__________
+			Need to find a way to add the ships rotation here
+		*/
+		setRotation(toDegree(angle) + 90.f + mRotation);
 		setVelocity(newVelocity);
 	}
 
@@ -95,4 +106,14 @@ float Projectile::getMaxSpeed() const
 int Projectile::getDamage() const
 {
 	return Table[static_cast<int>(mType)].damage;
+}
+
+void Projectile::setMRotation(float rotation)
+{
+	mRotation = rotation;
+}
+
+float Projectile::getMRotation()
+{
+	return mRotation;
 }

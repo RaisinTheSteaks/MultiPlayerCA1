@@ -196,6 +196,11 @@ float Ship::getMaxSpeed() const
 	return Table[static_cast<int>(mType)].speed;
 }
 
+float Ship::getTurnSpeed() const
+{
+	return Table[static_cast<int>(mType)].turnSpeed;
+}
+
 void Ship::increaseFireRate()
 {
 	if (mFireRateLevel < 10)
@@ -295,6 +300,11 @@ void Ship::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 	{
 		// Interval expired: We can fire a new bullet
 		commands.push(mFireCommand);
+		/*
+		Joshua Corcoran
+		D00190830
+		Currently, only 1 kind of player ship with only 1 type of gun
+		*/
 		playerLocalSound(commands, isAllied() ? SoundEffectID::AlliedGunfire : SoundEffectID::EnemyGunfire);
 		mFireCountdown += Table[static_cast<int>(mType)].fireInterval / (mFireRateLevel + 1.f);
 		mIsFiring = false;
@@ -340,14 +350,23 @@ void Ship::createBullets(SceneNode& node, const TextureHolder& textures) const
 
 void Ship::createProjectile(SceneNode& node, ProjectileID type, float xOffset, float yOffset, const TextureHolder& textures) const
 {
-	std::unique_ptr<Projectile> projectile(new Projectile(type, textures));
+	std::unique_ptr<Projectile> projectile(new Projectile(type, textures,getRotation()));
 
 	sf::Vector2f offset(xOffset * mSprite.getGlobalBounds().width, yOffset * mSprite.getGlobalBounds().height);
-	sf::Vector2f velocity(0, projectile->getMaxSpeed());
+	sf::Vector2f velocity(1,1);
+	/*
+		Joshua Corcoran
+		D00190830
+		_________
+		Trying to get bullets to turn with the ship
+	*/
+	float pi = 3.14159265;
+	velocity.y *= cos(projectile->getMRotation()*pi / 180) * -1;
+	velocity.x *= sin(projectile->getMRotation()*pi / 180) * 1;
 
-	float sign = isAllied() ? -1.f : +1.f;
-	projectile->setPosition(getWorldPosition() + offset * sign);
-	projectile->setVelocity(velocity * sign);
+	projectile->setPosition(getWorldPosition() +offset);
+	projectile->setRotation(projectile->getMRotation());
+	projectile->setVelocity(velocity*getMaxSpeed());
 	node.attachChild(std::move(projectile));
 }
 
