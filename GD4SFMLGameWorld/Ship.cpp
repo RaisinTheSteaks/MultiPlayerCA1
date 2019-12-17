@@ -363,13 +363,13 @@ void Ship::createProjectile(SceneNode& node, ProjectileID type, float xOffset, f
 		Joshua Corcoran
 		D00190830
 		_________
-		Trying to get bullets to turn with the ship
+		Trying to get bullets to turn firing direction with the ship
 	*/
-	float pi = 3.14159265;
+	float pi = 3.14159265f;
 	velocity.y *= cos(projectile->getMRotation()*pi / 180) * -1;
 	velocity.x *= sin(projectile->getMRotation()*pi / 180) * 1;
 
-	projectile->setPosition(getWorldPosition() +offset);
+	projectile->setPosition(getWorldPosition() +velocity*(offset.x+offset.y+10));
 	projectile->setRotation(projectile->getMRotation());
 	projectile->setVelocity(velocity*getMaxSpeed());
 	node.attachChild(std::move(projectile));
