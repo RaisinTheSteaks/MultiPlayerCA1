@@ -8,6 +8,8 @@
 #include "ParticleID.hpp"
 #include "PlayerID.hpp"
 #include "CategoryID.hpp"
+#include "Island.hpp"
+
 
 
 std::vector<PlayerData> initializePlayerData()
@@ -32,6 +34,16 @@ std::vector<PlayerData> initializePlayerData()
 
 	return data;
 }
+
+std::vector<IslandData> initializeIslandData()
+{
+	std::vector<IslandData> data(static_cast<int>(IslandID::IslandCount));
+	data[static_cast<int>(IslandID::Island)].texture = TextureID::Island;
+	data[static_cast<int>(IslandID::Island)].textureRect = sf::IntRect(0, 0, 140, 170);
+	data[static_cast<int>(IslandID::Island)].categoryID = CategoryID::Island1;
+	return data;
+}
+
 std::vector<ShipData> initializeShipData()
 {
 	std::vector<ShipData> data(static_cast<int>(ShipID::TypeCount));

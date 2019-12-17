@@ -16,8 +16,10 @@ enum class CategoryID
 	ParticleSystem = 1 << 9,
 	SoundEffect = 1 << 10,
 	Gun = 1 << 11,
+	Island1 = 1 << 12,
 	
 
 	Ship = PlayerShip | Player2Ship | AlliedShip | EnemyShip,
 	Projectile = AlliedProjectile | Allied2Projectile | EnemyProjectile,
+	Island = Island1
 };
